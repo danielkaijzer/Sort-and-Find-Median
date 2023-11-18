@@ -1,30 +1,23 @@
-#ifndef HALF_SELECTION_SORT
-#define HALF_SELECTION_SORT
+#ifndef STANDARD_SORT
+#define STANDARD_SORT
 
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <algorithm>
 
-int halfSelectionSort ( std::vector<int>& nums, int& duration){
+int standardSort ( std::vector<int>& nums, int& duration){
     auto t1 = std::chrono::high_resolution_clock::now();
 
     int half = nums.size()/2;
 
-    for (size_t i = 0; i < half + 1; ++i){
-        int min_index = i;
-
-        for (size_t j = i; j < nums.size(); ++j){
-            if (nums[j] < nums[min_index]){
-                min_index = j;
-            }
-        }
-        std::swap(nums[i], nums[min_index]);
-    }
+    std::sort(nums.begin(), nums.end());
 
     auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
     // auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
     auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
     duration = dur.count();
+
     return nums[half];
 }
 
