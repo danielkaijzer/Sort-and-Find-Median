@@ -4,9 +4,11 @@
 #include <iostream>
 #include <random>
 
-std::vector<int> generateWorstDataSet(int size, int min, int max){
+std::vector<int> generateWorstDataSet(int size){
     std::random_device rd;
     std::mt19937 rng(rd());
+    int min = 1;
+    int max = 20000;
     std::uniform_int_distribution<int> dist(min, max);
 
     std::vector<int> data;
