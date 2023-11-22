@@ -6,6 +6,10 @@
 #include <chrono>
 #include <algorithm>
 
+// UPDATE:
+// MAKE SURE YOU ARE USING HOARE'S PARTITION 
+// AND MOVE PIVOT TO END (SEE NOTES)
+
 int partition(std::vector<int>& a, int left, int right, int pivot) {
     while (left <= right) {
         while (a[left] < pivot) {
