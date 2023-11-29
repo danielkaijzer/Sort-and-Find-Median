@@ -30,8 +30,8 @@ int inPlaceMergeSort ( std::vector<int>& nums, int& duration){
     inPlaceMergeSortHelper(nums);
 
     auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
-    // auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-    auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
+    auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+    // auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
     duration = dur.count();
 
     return nums[half];

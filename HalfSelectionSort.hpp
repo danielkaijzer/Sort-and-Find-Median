@@ -8,6 +8,12 @@
 int halfSelectionSort ( std::vector<int>& nums, int& duration){
     auto t1 = std::chrono::high_resolution_clock::now();
 
+    // not sure if this needs to be in main or in this file
+    if (nums.size() > 50000){
+        std::cout << "input too big for selection sort\n";
+        return -1;
+    }
+
     int half = nums.size()/2;
 
     for (size_t i = 0; i < half + 1; ++i){
@@ -22,8 +28,8 @@ int halfSelectionSort ( std::vector<int>& nums, int& duration){
     }
 
     auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
-    // auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-    auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
+    auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
+    // auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
     duration = dur.count();
     return nums[half];
 }
