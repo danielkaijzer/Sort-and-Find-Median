@@ -16,7 +16,7 @@ int halfSelectionSort ( std::vector<int>& nums, int& duration){
 
     int half = nums.size()/2;
 
-    for (size_t i = 0; i < half + 1; ++i){
+    for (size_t i = 0; i <= half; ++i){
         int min_index = i;
 
         for (size_t j = i; j < nums.size(); ++j){

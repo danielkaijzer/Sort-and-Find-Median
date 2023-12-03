@@ -103,10 +103,10 @@ int main(){
 
 
 
-    std::cout << "Standard Sort: \n";
-    std::cout << "Median: " << standardSort(nums,duration) <<
-    std::endl << "Duration: " << duration << std::endl << std::endl;
-    int Standard_Duration = duration;
+    // std::cout << "Standard Sort: \n";
+    // std::cout << "Median: " << standardSort(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int Standard_Duration = duration;
 
     // std::cout << "Merge Sort: \n";
     // std::cout << "Median: " << mergeSort(nums,duration) <<
@@ -126,28 +126,28 @@ int main(){
     // int HalfHeapSort_Duration = duration;
 
     // DOESN'T MATCH OUTPUT
-    // std::cout << "QuickSelect: \n";
-    // std::cout << "Median: " << quickSelect(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int QuickSelect_Duration = duration;
+    std::cout << "QuickSelect: \n";
+    std::cout << "Median: " << quickSelect(nums,duration) <<
+    std::endl << "Duration: " << duration << std::endl << std::endl;
+    int QuickSelect_Duration = duration;
 
     // std::cout << "Median of Medians: \n";
     // std::cout << "Median: " << medianOfMedians(nums,duration) <<
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int MedianOfMedians = duration;
 
-    // std::vector<int> output = readIntegersFromFile("quickselect1.txt");
+    std::vector<int> output = readIntegersFromFile("quickselect1.txt");
 
-    // if (vectorsMatch(nums, output)) {
-    //     std::cout << "Vectors match!" << std::endl;
-    // } else {
-    //     std::cout << "Vectors do not match." << std::endl;
-    // }
+    if (vectorsMatch(nums, output)) {
+        std::cout << "Vectors match!" << std::endl;
+    } else {
+        std::cout << "Vectors do not match." << std::endl;
+    }
 
-    // for (auto num : nums){
-    //     std::cout << num << " ";
-    // }
-    // std::cout << std::endl;
+    for (auto num : nums){
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
 
     // outputs for HEAPSORT
         // 50214089 50200007 49946203 ... 99617657 99881669 99922526

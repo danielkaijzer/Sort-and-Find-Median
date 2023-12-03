@@ -23,7 +23,7 @@ void percDown(std::vector<int>& nums, int hole, int size){
         }
         // if largest child > current hole value (in tmp), swap
         if(nums[child] > tmp){
-            nums[hole] = nums[child];
+            std::swap(nums[hole], nums[child]);
         }
         // else if largest child is less than value in hole 
         // OR we are at the end of the array

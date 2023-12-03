@@ -7,7 +7,7 @@
 #include <algorithm>
 
 void InsertionSort(std::vector<int> & a, int left, int right){
-    for (int p = left+1; p < right; ++p){
+    for (int p = left+1; p <= right; ++p){
         int tmp = a[p];
 
         int j;
