@@ -16,10 +16,10 @@ int halfSelectionSort ( std::vector<int>& nums, int& duration){
 
     int half = nums.size()/2;
 
-    for (size_t i = 0; i <= half; ++i){
+    for (int i = 0; i <= half-1; ++i){
         int min_index = i;
 
-        for (size_t j = i; j < nums.size(); ++j){
+        for (int j = i+1; j < nums.size(); ++j){
             if (nums[j] < nums[min_index]){
                 min_index = j;
             }
@@ -31,7 +31,16 @@ int halfSelectionSort ( std::vector<int>& nums, int& duration){
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
     // auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
     duration = dur.count();
-    return nums[half];
+
+    // // print output
+    // for (auto num : nums){
+    //     std::cout << num << " ";
+    // }
+    // std::cout << std::endl;
+
+    // return nums[half];
+    // Return the index of the median (lesser of the two middle elements)
+        return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
 }
 
 #endif

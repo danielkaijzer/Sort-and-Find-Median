@@ -17,8 +17,9 @@ int standardSort ( std::vector<int>& nums, int& duration){
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
     // auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
     duration = dur.count();
-
-    return nums[half];
+    
+    // Return the index of the median (lesser of the two middle elements)
+        return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
 }
 
 #endif

@@ -8,7 +8,7 @@
 
 void percDown(std::vector<int>& nums, int hole, int size){
     int child;
-    int tmp = nums[hole];
+    int tmp = std::move(nums[hole]);
 
     // keep checking children to see if any of them 
     // have values larger than current hole value
@@ -18,7 +18,7 @@ void percDown(std::vector<int>& nums, int hole, int size){
 
         // check if right child exists
         // and if right child is larger than left child
-        if(child + 1 < size && nums[child] < nums[child+1]){
+        if(child + 1 < size && nums[child] <= nums[child+1]){
             ++child; // right child is largest child
         }
         // if largest child > current hole value (in tmp), swap
@@ -31,18 +31,23 @@ void percDown(std::vector<int>& nums, int hole, int size){
             break;
     }
 
-    nums[hole] = tmp;
+    nums[hole] = std::move(tmp);
 }
 
 int halfHeapSort ( std::vector<int>& nums, int& duration){
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    nums.push_back(nums[0]); // free up index 0
+    const std::vector<int>::size_type size = nums.size();
     // int half = nums.size() / 2 +1; // USE if you don't restore vector state
     int half = nums.size() / 2;
 
+    // nums.push_back(nums[0]); // free up index 0
+     // Before starting heapsort, move the first element to the back of the vector
+        std::swap(nums[0], nums[size - 1]);
+        
+
     // PHASE 1: BUILD HEAP
-    for (int i = nums.size()/2; i >=1; --i){
+    for (int i = nums.size()/2; i >=1; --i){ // works whether I use i >= 0 or i > 0
         percDown(nums, i, nums.size());
     }
 
@@ -51,6 +56,7 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
         std::swap(nums[1], nums[j]);
         percDown(nums, 1, j-1); // recurse
     }
+
 
     // NOT SURE IF THIS IS REQUIRED:
     // remove 0 index, so vector goes back to original state
@@ -61,7 +67,9 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
     // auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
     duration = dur.count();
 
-    return nums[half];
+    // return nums[half];
+    // Return the index of the median (lesser of the two middle elements)
+        return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
 }
 
 
