@@ -39,10 +39,10 @@ inline int LChild(int i){
 
 // void percDown ( std::vector<int>& heap, std::vector<int>::size_type hole )
 
-void percolateDown(std::vector<int>& nums, int hole){
+void percolateDown(std::vector<int>& nums, int hole, int n){
     int child;
 
-    int size = nums.size();
+    int size = n;
 
     // keep checking children to see if any of them 
     // have values larger than current hole value
@@ -73,11 +73,11 @@ void percolateDown(std::vector<int>& nums, int hole){
 
 void buildHeap(std::vector<int>& heap){
     for (int i = heap.size()/2-1; i >=1; --i){
-        percolateDown(heap, i);
+        percolateDown(heap, i, heap.size());
     }
 }
 
-int halfHeapSort ( std::vector<int>& nums, int& duration){
+int HeapSort ( std::vector<int>& nums, int& duration){
     auto t1 = std::chrono::high_resolution_clock::now();
 
     nums.push_back(nums[0]); // free up index 0
@@ -86,22 +86,26 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
     buildHeap(nums);
 
     // PHASE 2: DELETEMAX()
-    for (int j = (nums.size()/2)+1; j > 1; --j){
-        std::swap(nums[1],nums[nums.size()-1]);
-        nums.pop_back();
-        percolateDown(nums,1);
+    // for (int j = nums.size()-1; j >1; --j){
+    //     std::swap(nums[1],nums[j]);
+    //     percolateDown(nums,1,j);
+    // }
+
+
+    for (int j = nums.size()-1; j >1; --j){
+        std::swap(nums[1],nums[j]);
+        percolateDown(nums,1,j);
     }
 
     // remove 0 index, so vector goes back to original state
-    // nums.erase(nums.begin());
+    nums.erase(nums.begin());
 
     auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
     duration = dur.count();
 
     // Return the index of the median (lesser of the two middle elements)
-        // return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
-    return nums[1]; // Median: 50492874
+        return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
 }
 
 

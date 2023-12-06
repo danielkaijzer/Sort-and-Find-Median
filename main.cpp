@@ -6,6 +6,7 @@
 #include "HalfHeapSort.hpp"
 #include "QuickSelect.hpp"
 #include "MedianOfMedians.hpp"
+// #include "HeapSort.hpp"
 
 #include <iostream>
 #include <vector>
@@ -15,9 +16,10 @@
 bool vectorsMatch(const std::vector<int>& vector1, const std::vector<int>& vector2) {
     // Check if the lengths of the vectors are the same
     if (vector1.size() != vector2.size()) {
+        std::cout << vector1.size() <<"\n";
+        std::cout << vector2.size() <<"\n";
         return false;
     }
-    // std::cout << vector1.size() <<"/n";
 
     // Compare each element of the vectors
     for (size_t i = 0; i < vector1.size(); ++i) {
@@ -51,8 +53,7 @@ void writeVectorToFile(const std::vector<int>& numbers, const std::string& filen
     outputFile.close();
 }
 
-std::vector<int> readIntegersFromFile(const std::string& filename) {
-    std::vector<int> result;
+void readIntegersFromFile(const std::string& filename, std::vector<int> &vec) {
     
     // Open the file
     std::ifstream file(filename);
@@ -60,74 +61,65 @@ std::vector<int> readIntegersFromFile(const std::string& filename) {
     // Check if the file is opened successfully
     if (!file.is_open()) {
         std::cerr << "Error opening file: " << filename << std::endl;
-        // You may choose to handle the error differently, e.g., throw an exception
-        return result;
+        return;
     }
 
-    int number;
+    int value;
     // Read integers from the file and append them to the vector
-    while (file >> number) {
-        result.push_back(number);
+    while (file >> value) {
+        vec.push_back(value);
     }
 
     // Close the file
     file.close();
 
-    return result;
+    return;
 }
+
+
 
 int main(){
     int duration = 0;
-
-    std::string filename = "input1.txt";
     std::vector<int> nums;
- 
-    std::ifstream inputFile(filename);
-    if (!inputFile.is_open()){
-        std::cerr << "Error opening file: " << filename << std::endl;
-        return 1;
-    }
 
-    int value;
-    while (inputFile >> value){
-        nums.push_back(value);
-    }
-
-    inputFile.close();
-
-    // MATCHES OUTPUT!
-    // std::cout << "Half Selection Sort: \n";
-    // std::cout << "Median: " << halfSelectionSort(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int halfSelection_Duration = duration;
-
-    // write output to file
-    // std::string halfSelect_Output = "halfSelect_Output.txt";
-    // writeVectorToFile(nums, halfSelect_Output);
-
-
+    readIntegersFromFile("input1.txt", nums);
 
     // std::cout << "Standard Sort: \n";
     // std::cout << "Median: " << standardSort(nums,duration) <<
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int Standard_Duration = duration;
 
+    // write output to file
+    // std::string sorted_output = "Sorted_Output.txt";
+    // writeVectorToFile(nums, sorted_output);
+
+
+    // std::cout << "Half Selection Sort: \n";
+    // std::cout << "Median: " << halfSelectionSort(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int halfSelection_Duration = duration;
+
     // std::cout << "Merge Sort: \n";
     // std::cout << "Median: " << mergeSort(nums,duration) <<
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int MergeSort_Duration = duration;
-
 
     // std::cout << "In-Place Merge Sort: \n";
     // std::cout << "Median: " << inPlaceMergeSort(nums,duration) <<
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int InPlaceMergeSort_Duration = duration;
 
+
     // DOESN'T MATCH OUTPUT
     std::cout << "Half Heap Sort: \n";
     std::cout << "Median: " << halfHeapSort(nums,duration) <<
     std::endl << "Duration: " << duration << std::endl << std::endl;
     int HalfHeapSort_Duration = duration;
+
+    // std::cout << "Full Heap Sort: \n";
+    // std::cout << "Median: " << HeapSort(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int heapSort_Duration = duration;
 
     // DOESN'T MATCH OUTPUT
     // std::cout << "QuickSelect: \n";
@@ -140,7 +132,9 @@ int main(){
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int MedianOfMedians = duration;
 
-    std::vector<int> output = readIntegersFromFile("heapsort1.txt");
+    std::vector<int> output;
+    // readIntegersFromFile("heapsort1.txt",output);
+    readIntegersFromFile("heapsort1.txt",output);
 
     if (vectorsMatch(nums, output)) {
         std::cout << "Vectors match!" << std::endl;
@@ -149,10 +143,10 @@ int main(){
     }
 
     for (int i = 0; i < nums.size(); ++i){
-        if (i < 2 || i > 996)
+        if (i < 3 || i > nums.size()-3)
         std::cout << nums[i] << " ";
     }
-    std::cout << std::endl;
+    std::cout <<std::endl << nums.size() <<std::endl;
 
     // outputs for HEAPSORT
         // 50214089 50200007 49946203 ... 99617657 99881669 99922526
