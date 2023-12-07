@@ -33,7 +33,7 @@ If the hole's left child and right child are equal
 #include <chrono>
 #include <algorithm>
 
-inline int LChild(int i){
+inline int LeftChild(int i){
     return 2*i;
 }
 
@@ -44,22 +44,24 @@ void percolateDown(std::vector<int>& nums, int hole){
 
     int size = nums.size();
 
+    nums[0] = std::move(nums[hole]); // move hole val into temp area
+
     // keep checking children to see if any of them 
     // have values larger than current hole value
     // if so, swap current hole and largest child
-    for (nums[0] = std::move(nums[hole]); LChild(hole) < size; hole = child){
-        child = LChild(hole); // make child current left child of hole
+    for (; LeftChild(hole) <= size; hole = child){
+        child = LeftChild(hole); // make child current left child of hole
         int rightChild = child+1;
 
         // if left child index isn't last index of array
-        // and if right child is larger than left child
-        if(child != size - 1 && nums[child] < nums[rightChild]){
-            ++child; // right child is largest child
+        // and if right child is smaller than left child
+        if(child != size && nums[rightChild] < nums[child]){
+            ++child; // right child is smallest child
         }
 
-        // if largest child > current hole value (in tmp),
+        // if smallest child < current hole value (at nums[0]),
         // update hole value
-        if(nums[0] < nums[child]){
+        if(nums[child] < nums[0]){
             nums[hole] = std::move(nums[child]);
         }
         // else if largest child is less than value in hole 
@@ -82,18 +84,34 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
 
     nums.push_back(nums[0]); // free up index 0
         
-    // PHASE 1: BUILD (MAX)HEAP
+    // PHASE 1: BUILD (MIN)HEAP
     buildHeap(nums);
 
-    // PHASE 2: DELETEMAX()
-    for (int j = (nums.size()/2)+1; j > 1; --j){
-        std::swap(nums[1],nums[nums.size()-1]);
+    //95419021 50492874 50624991 57423279 86361348 92940355
+    
+    // nums[1] = std::move(nums[nums.size()-1]);
+    // nums.pop_back();
+
+    // PHASE 2: DELETEMIN()
+    for (int j = (nums.size()/2); j > 1; --j){
+    // for (int j = 1; j < nums.size()/2; ++j){
+        // Delete min
+        // std::swap(nums[1],nums[nums.size()-1]); // Delete min
+        nums[1] = std::move(nums[nums.size()-1]);
         nums.pop_back();
+        // Percolate down to restore minheap property
         percolateDown(nums,1);
     }
 
+    // Percolate down to restore minheap property
+        // percolateDown(nums,1);
+    // nums[0] = nums[84];
+    // std::cout <<  << std::endl;
+    // vector::iterator it = vec.begin() + 85;
+    // nums.erase(nums.begin() + 86);
+
     // remove 0 index, so vector goes back to original state
-    // nums.erase(nums.begin());
+    nums.erase(nums.begin());
 
     auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
@@ -101,7 +119,7 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
 
     // Return the index of the median (lesser of the two middle elements)
         // return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
-    return nums[1]; // Median: 50492874
+    return nums[1]; // Median: 50 492 874
 }
 
 

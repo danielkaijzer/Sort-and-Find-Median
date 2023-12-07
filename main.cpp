@@ -24,6 +24,7 @@ bool vectorsMatch(const std::vector<int>& vector1, const std::vector<int>& vecto
     // Compare each element of the vectors
     for (size_t i = 0; i < vector1.size(); ++i) {
         if (vector1[i] != vector2[i]) {
+            std::cout << i << "\n";
             std::cout << vector1[i] << std::endl;
             std::cout << vector2[i] << std::endl;
             return false;
@@ -143,13 +144,14 @@ int main(){
     }
 
     for (int i = 0; i < nums.size(); ++i){
-        if (i < 3 || i > nums.size()-3)
+        if (i < 3 || i > nums.size()-4)
         std::cout << nums[i] << " ";
     }
-    std::cout <<std::endl << nums.size() <<std::endl;
+    std::cout <<std::endl;
+    //  << nums.size() <<std::endl;
 
     // outputs for HEAPSORT
-        // 50214089 50200007 49946203 ... 99617657 99881669 99922526
+        // OUTPUT:  50492874 50624991 50579758 ... 57423279 86361348 92940355
 
         // CORRECT: 50492874 50624991 50579758 ... 57423279 98679032 92940355
 
