@@ -33,12 +33,6 @@ If the hole's left child and right child are equal
 #include <chrono>
 #include <algorithm>
 
-inline int LeftChild(int i){
-    return 2*i;
-}
-
-// void percDown ( std::vector<int>& heap, std::vector<int>::size_type hole )
-
 void percolateDown(std::vector<int>& nums, int hole){
     int child;
 
@@ -49,13 +43,12 @@ void percolateDown(std::vector<int>& nums, int hole){
     // keep checking children to see if any of them 
     // have values larger than current hole value
     // if so, swap current hole and largest child
-    for (; LeftChild(hole) <= size; hole = child){
-        child = LeftChild(hole); // make child current left child of hole
-        int rightChild = child+1;
+    for (; hole*2 <= size; hole = child){
+        child = hole*2; // make child current left child of hole
 
         // if left child index isn't last index of array
         // and if right child is smaller than left child
-        if(child != size && nums[rightChild] < nums[child]){
+        if(child != size && nums[child+1] < nums[child]){
             ++child; // right child is smallest child
         }
 
@@ -74,7 +67,7 @@ void percolateDown(std::vector<int>& nums, int hole){
 }
 
 void buildHeap(std::vector<int>& heap){
-    for (int i = heap.size()/2-1; i >=1; --i){
+    for (int i = (heap.size()/2)-1; i >=1; --i){
         percolateDown(heap, i);
     }
 }
@@ -87,39 +80,24 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
     // PHASE 1: BUILD (MIN)HEAP
     buildHeap(nums);
 
-    //95419021 50492874 50624991 57423279 86361348 92940355
-    
-    // nums[1] = std::move(nums[nums.size()-1]);
-    // nums.pop_back();
-
     // PHASE 2: DELETEMIN()
-    for (int j = (nums.size()/2); j > 1; --j){
-    // for (int j = 1; j < nums.size()/2; ++j){
-        // Delete min
-        // std::swap(nums[1],nums[nums.size()-1]); // Delete min
+    for (int j = (nums.size())/2; j > 1; --j){
         nums[1] = std::move(nums[nums.size()-1]);
         nums.pop_back();
         // Percolate down to restore minheap property
         percolateDown(nums,1);
     }
 
-    // Percolate down to restore minheap property
-        // percolateDown(nums,1);
-    // nums[0] = nums[84];
-    // std::cout <<  << std::endl;
-    // vector::iterator it = vec.begin() + 85;
-    // nums.erase(nums.begin() + 86);
-
-    // remove 0 index, so vector goes back to original state
+    // remove 0 index used for temp values, 
+    // so vector goes back to original state
     nums.erase(nums.begin());
 
     auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
     duration = dur.count();
 
-    // Return the index of the median (lesser of the two middle elements)
-        // return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
-    return nums[1]; // Median: 50 492 874
+    // return median at root
+    return nums[0]; // Median: 50 492 874, 50173306
 }
 
 

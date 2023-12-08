@@ -1,98 +1,71 @@
-#ifndef QUICK_SELECT
-#define QUICK_SELECT
-
 #include <iostream>
 #include <vector>
 #include <chrono>
 #include <algorithm>
 
-void InsertionSort(std::vector<int> & a, int left, int right){
-    for (int p = left+1; p <= right; ++p){
-        int tmp = a[p];
+const int& median3(std::vector<int>& a, std::vector<int>::iterator left, std::vector<int>::iterator right) {
+    auto center = left + std::distance(left, right) / 2;
 
-        int j;
-        for (j=p; j > left && tmp < a[j-1]; --j){
-            a[j] = a[j-1];
+    if (*center < *left) {
+        std::iter_swap(left, center);
+    }
+    if (*right < *left) {
+        std::iter_swap(left, right);
+    }
+    if (*right < *center) {
+        std::iter_swap(center, right);
+    }
+
+    std::iter_swap(center, right - 1);
+    return *(right - 1);
+}
+
+std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<int>::iterator low, std::vector<int>::iterator high) {
+    int pivot = median3(nums, low, high);
+    auto i = low;
+    auto j = high - 1;
+
+    while (true) {
+        do {
+            ++i;
+        } while (*i < pivot);
+
+        do {
+            --j;
+        } while (*j > pivot);
+
+        if (i >= j) {
+            return j + 1;
         }
-        a[j] = tmp;
+
+        std::iter_swap(i, j);
     }
 }
 
-/**
- * @brief 
- * Return median of left, center, and right
- * Order these and hide the pivot
- */
-const int & median3(std::vector<int> & a, int left, int right){
-    int center = (left+right)/2;
+void quickSelectHelper(std::vector<int>& a, std::vector<int>::iterator left, std::vector<int>::iterator right, std::vector<int>::iterator k) {
+    if (std::distance(left, right) >= 10) {
+        auto i = hoarePartition(a, left, right);
 
-    // find middle value of 3 
-    if (a[center] < a[left]){
-        std::swap(a[left], a[center]);
+        if (k < i) {
+            quickSelectHelper(a, left, i, k);
+        } else if (k >= i) {
+            quickSelectHelper(a, i, right, k);
+        }
+    } else {
+        std::sort(left, right);
     }
-    if (a[right] < a[left]){
-        std::swap(a[left], a[right]);
-    }
-    if (a[right] < a[center]){
-        std::swap(a[center],a[right]);
-    }
-
-    // Place pivot at position right - 1
-    std::swap(a[center], a[right-1]);
-    return a[right -1]; // return pivot
-
 }
 
-// Internal QuickSelect method
-void quickSelectHelper(std::vector<int> &a, int left, int right, int k){
-
-    if (left+10 <= right){
-        int pivot = median3(a, left, right);
-        // int pivot = 1;
-
-        // Begin partitioning
-        int i = left, j = right -1;
-        for(;;){
-            while(a[++i] < pivot){}
-            while(pivot < a[--j]){}
-            if (i < j){
-                std::swap(a[i], a[j]);
-            }
-            else{
-                break;
-            }
-        }
-
-        std::swap(a[i], a[right-1]); // restore pivot
-
-        // Recurse
-        if (k <= i){
-            quickSelectHelper(a, left, i-1,k);
-        }
-        else if(k > i+1){
-            quickSelectHelper(a, i+1, right, k);
-        }
-    }
-    else // do insertion sort on subarray
-        InsertionSort(a, left, right);
-}
-
-// Driver
-int quickSelect( std::vector<int>& nums, int& duration){
+int quickSelect(std::vector<int>& nums, int& duration) {
     auto t1 = std::chrono::high_resolution_clock::now();
 
     int half = nums.size() / 2;
 
-    quickSelectHelper(nums, 0, nums.size()-1, half);
+    quickSelectHelper(nums, nums.begin(), nums.end(), nums.begin() + half);
 
-    auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
+    auto t2 = std::chrono::high_resolution_clock::now();
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-    // auto dur = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
     duration = dur.count();
 
-    // return nums[half];
-    // Return the index of the median (lesser of the two middle elements)
-        return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
+    return nums[half];
 }
-
-#endif
