@@ -1,9 +1,13 @@
+#ifndef QUICK_SELECT
+#define QUICK_SELECT
+
 #include <iostream>
 #include <vector>
 #include <chrono>
 #include <algorithm>
 
 const int& median3(std::vector<int>& a, std::vector<int>::iterator left, std::vector<int>::iterator right) {
+    // auto center = a.begin() + (std::distance(left, right) / 2);
     auto center = left + std::distance(left, right) / 2;
 
     if (*center < *left) {
@@ -16,56 +20,73 @@ const int& median3(std::vector<int>& a, std::vector<int>::iterator left, std::ve
         std::iter_swap(center, right);
     }
 
+    // place pivot at position right
     std::iter_swap(center, right - 1);
-    return *(right - 1);
+    return *(right-1);
 }
 
 std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<int>::iterator low, std::vector<int>::iterator high) {
-    int pivot = median3(nums, low, high);
-    auto i = low;
-    auto j = high - 1;
+    int pivot = median3(nums,low,high);
+    auto i = low, j = high - 1;
 
-    while (true) {
-        do {
-            ++i;
-        } while (*i < pivot);
+    // v1
+    for (;;){
+        while(*++i < pivot){}
+        while(pivot < *--j){}
 
-        do {
-            --j;
-        } while (*j > pivot);
+        int i_index = std::distance(nums.begin(),i);
+        int j_index = std::distance(nums.begin(),j);
 
-        if (i >= j) {
-            return j + 1;
+        // if i is still before j in vector but has greater value, swap
+        if (i_index < j_index){
+            std::iter_swap(i,j);
         }
-
-        std::iter_swap(i, j);
+        else
+            break;
     }
+    std::iter_swap(i,high-1); // restore pivot
+    return i;
+    
 }
 
-void quickSelectHelper(std::vector<int>& a, std::vector<int>::iterator left, std::vector<int>::iterator right, std::vector<int>::iterator k) {
-    if (std::distance(left, right) >= 10) {
+void quickSelectHelper(std::vector<int>& a, std::vector<int>::iterator left, std::vector<int>::iterator right) {
+    auto k = a.begin()+ a.size()/2;
+    // int k = a.size()/2;
+    
+    if (left + 10 <= right) {
+    // if (std::distance(left, right) >= 10) {
         auto i = hoarePartition(a, left, right);
 
-        if (k < i) {
-            quickSelectHelper(a, left, i, k);
-        } else if (k >= i) {
-            quickSelectHelper(a, i, right, k);
+        // int i_index = std::distance(a.begin(),i);
+
+        if (k < i){
+            // quickSelectHelper(a, left, i-1); // sort small elements
+            quickSelectHelper(a, left, i);
         }
-    } else {
+        else if (k >= i){
+            quickSelectHelper(a, i, right);
+            // quickSelectHelper(a, i+1, right); // sort large elements
+        }
+    } 
+    else {
         std::sort(left, right);
+        
     }
 }
 
 int quickSelect(std::vector<int>& nums, int& duration) {
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    int half = nums.size() / 2;
-
-    quickSelectHelper(nums, nums.begin(), nums.end(), nums.begin() + half);
+    quickSelectHelper(nums, nums.begin(), nums.end()-1);
 
     auto t2 = std::chrono::high_resolution_clock::now();
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
     duration = dur.count();
+    int half = nums.size() / 2;
+    // return nums[half];
 
-    return nums[half];
+    return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
+    // Median: 50492874
 }
+
+#endif

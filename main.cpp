@@ -10,10 +10,13 @@
 
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
 
 // Median: 50492874
 
 bool vectorsMatch(const std::vector<int>& vector1, const std::vector<int>& vector2) {
+    char median[] = "50492874";
+    
     // Check if the lengths of the vectors are the same
     if (vector1.size() != vector2.size()) {
         std::cout << vector1.size() <<"\n";
@@ -27,10 +30,12 @@ bool vectorsMatch(const std::vector<int>& vector1, const std::vector<int>& vecto
     // Compare each element of the vectors
     for (size_t i = 0; i < vector1.size(); ++i) {
         if (vector1[i] != vector2[i]) {
-            std::cout << i << "\n";
-            std::cout << vector1[i] << std::endl;
-            std::cout << vector2[i] << std::endl;
+            std::cout << "index " << i << " in vector1 has value: " << vector1[i] << std::endl;
+            std::cout << "index " << i << " in vector2 has value: " << vector2[i] << std::endl;
             return false;
+        }
+        if (vector2[i] == std::atoi(median)){
+            std::cout << "index of median: " << i << std::endl;
         }
     }
 
@@ -151,8 +156,9 @@ int main(){
         std::cout << nums[i] << " ";
     }
     std::cout <<std::endl;
-    //  << nums.size() <<std::endl;
 
+    auto itr = nums.begin();
+    auto itr2 = nums.begin()+2;
     // outputs for HEAPSORT
         // OUTPUT:  50492874 50624991 50579758 ... 57423279 86361348 92940355
 
