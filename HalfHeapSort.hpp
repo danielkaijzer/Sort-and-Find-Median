@@ -67,7 +67,7 @@ void percolateDown(std::vector<int>& nums, int hole){
 }
 
 void buildHeap(std::vector<int>& heap){
-    for (int i = (heap.size()/2)-1; i >=1; --i){
+    for (int i = (heap.size()/2)-1; i >0; --i){
         percolateDown(heap, i);
     }
 }
@@ -83,9 +83,9 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
     // PHASE 2: DELETEMIN()
     for (int j = (nums.size())/2; j > 1; --j){
         nums[1] = std::move(nums[nums.size()-1]);
-        nums.pop_back();
         // Percolate down to restore minheap property
         percolateDown(nums,1);
+        nums.pop_back(); // --j
     }
 
     // remove 0 index used for temp values, 
