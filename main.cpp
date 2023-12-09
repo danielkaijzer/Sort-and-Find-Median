@@ -5,6 +5,7 @@
 #include "InPlaceMergeSort.hpp"
 #include "HalfHeapSort.hpp"
 #include "QuickSelect.hpp"
+// #include "QuickSort.hpp"
 #include "MedianOfMedians.hpp"
 // #include "HeapSort.hpp"
 
@@ -120,10 +121,10 @@ int main(){
 
 
     // DOESN'T MATCH OUTPUT
-    std::cout << "Half Heap Sort: \n";
-    std::cout << "Median: " << halfHeapSort(nums,duration) <<
-    std::endl << "Duration: " << duration << std::endl << std::endl;
-    int HalfHeapSort_Duration = duration;
+    // std::cout << "Half Heap Sort: \n";
+    // std::cout << "Median: " << halfHeapSort(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int HalfHeapSort_Duration = duration;
 
     // std::cout << "Full Heap Sort: \n";
     // std::cout << "Median: " << HeapSort(nums,duration) <<
@@ -131,8 +132,13 @@ int main(){
     // int heapSort_Duration = duration;
 
     // DOESN'T MATCH OUTPUT
-    // std::cout << "QuickSelect: \n";
-    // std::cout << "Median: " << quickSelect(nums,duration) <<
+    std::cout << "QuickSelect: \n";
+    std::cout << "Median: " << quickSelect(nums,duration) <<
+    std::endl << "Duration: " << duration << std::endl << std::endl;
+    int QuickSelect_Duration = duration;
+
+    // std::cout << "Quicksort: \n";
+    // std::cout << "Median: " << quickSort(nums,duration) <<
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int QuickSelect_Duration = duration;
 
@@ -143,7 +149,7 @@ int main(){
 
     std::vector<int> output;
     // readIntegersFromFile("heapsort1.txt",output);
-    readIntegersFromFile("heapsort1.txt",output);
+    readIntegersFromFile("quickselect1.txt",output);
 
     if (vectorsMatch(nums, output)) {
         std::cout << "Vectors match!" << std::endl;
@@ -157,8 +163,6 @@ int main(){
     }
     std::cout <<std::endl;
 
-    auto itr = nums.begin();
-    auto itr2 = nums.begin()+2;
     // outputs for HEAPSORT
         // OUTPUT:  50492874 50624991 50579758 ... 57423279 86361348 92940355
 
