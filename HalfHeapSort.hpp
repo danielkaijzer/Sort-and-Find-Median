@@ -67,7 +67,9 @@ void percolateDown(std::vector<int>& nums, int hole){
 }
 
 void buildHeap(std::vector<int>& heap){
-    for (int i = (heap.size()/2)-1; i >0; --i){
+    int median = heap.size() % 2 == 0 ? heap.size() / 2: heap.size() / 2;
+
+    for (int i = median-1; i >0; --i){
         percolateDown(heap, i);
     }
 }
@@ -75,18 +77,27 @@ void buildHeap(std::vector<int>& heap){
 int halfHeapSort ( std::vector<int>& nums, int& duration){
     auto t1 = std::chrono::high_resolution_clock::now();
 
+    int median = nums.size() % 2 == 0 ? nums.size() / 2-1: nums.size() / 2;
+
+    // bool even = nums.size() % 2 == 0 ? true: false;
+
     nums.push_back(nums[0]); // free up index 0
         
     // PHASE 1: BUILD (MIN)HEAP
     buildHeap(nums);
 
     // PHASE 2: DELETEMIN()
-    for (int j = (nums.size())/2; j > 1; --j){
+
+    for (int j = median+1; j > 1; --j){
         nums[1] = std::move(nums[nums.size()-1]);
         nums.pop_back(); // --j
         // Percolate down to restore minheap property
         percolateDown(nums,1);
     }
+
+    // if (even){
+    //     nums.pop_back();
+    // }
 
     // remove 0 index used for temp values, 
     // so vector goes back to original state
