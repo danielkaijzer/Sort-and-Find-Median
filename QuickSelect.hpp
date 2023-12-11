@@ -7,13 +7,7 @@
 #include <algorithm>
 
 std::vector<int>::iterator median3(std::vector<int>& a, std::vector<int>::iterator& low, std::vector<int>::iterator& high) {
-    auto center = low;
-    // if (std::distance(low,high) %2 != 0){
-        // center += std::distance(low, high) / 2;
-    // }
-    // else{
-        center += std::distance(low, high) / 2 -1;
-    // }
+    auto center = low + std::distance(low, high) / 2-1;
 
     // Checking for center
     if ((*low < *center && *center < *high) || (*high < *center && *center < *low))
@@ -31,15 +25,11 @@ std::vector<int>::iterator median3(std::vector<int>& a, std::vector<int>::iterat
 std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<int>::iterator low, std::vector<int>::iterator high) {
     auto pivot = median3(nums,low,high);
 
-    auto i = low;
-    auto j = high-1;
+    auto i = low-1;
+    auto j = high;
     for (;;){
-        while(*i < *pivot){
-            i++;
-        }
-        while(*j > *pivot){
-            j--;
-        }
+        while(*++i < *pivot);
+        while(*--j > *pivot);
         
         // if i is still before j in vector but has greater value, swap
         if (i < j ){
@@ -91,7 +81,6 @@ int quickSelect(std::vector<int>& nums, int& duration) {
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
     duration = dur.count();
     int median = nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2;
-    // int median = nums.size()/2;
     return nums[median];
 }
 

@@ -66,10 +66,10 @@ void quickSelectHelper(std::vector<int> &a, int left, int right, int k){
         std::swap(a[i], a[right-1]); // restore pivot
 
         // Recurse
-        // if (k <= i){
+        if (k <= i){
             quickSelectHelper(a, left, i-1,k);
         // }
-        // else if(k > i+1){
+        else if(k > i+1){
             quickSelectHelper(a, i+1, right, k);
         // }
     }

@@ -92,7 +92,7 @@ int main(){
     int duration = 0;
     std::vector<int> nums;
 
-    readIntegersFromFile("input4.txt", nums);
+    readIntegersFromFile("input1.txt", nums);
 
     // std::cout << "Standard Sort: \n";
     // std::cout << "Median: " << standardSort(nums,duration) <<
@@ -148,8 +148,8 @@ int main(){
     // int MedianOfMedians = duration;
 
     std::vector<int> output;
-    // readIntegersFromFile("heapsort1.txt",output);
-    readIntegersFromFile("heapsort4.txt",output);
+    readIntegersFromFile("heapsort1.txt",output);
+    // readIntegersFromFile("heapsort4.txt",output);
 
     if (vectorsMatch(nums, output)) {
         std::cout << "Vectors match!" << std::endl;

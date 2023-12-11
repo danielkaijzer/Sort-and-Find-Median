@@ -95,10 +95,6 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
         percolateDown(nums,1);
     }
 
-    // if (even){
-    //     nums.pop_back();
-    // }
-
     // remove 0 index used for temp values, 
     // so vector goes back to original state
     nums.erase(nums.begin());
