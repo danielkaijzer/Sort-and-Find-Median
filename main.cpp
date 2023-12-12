@@ -15,7 +15,7 @@
 // Median: 50492874, 50173306
 
 bool vectorsMatch(const std::vector<int>& vector1, const std::vector<int>& vector2) {
-    char median[] = "50492874";
+    char median[] = "50173306";
     
     // Check if the lengths of the vectors are the same
     if (vector1.size() != vector2.size()) {
@@ -91,10 +91,10 @@ void readIntegersFromFile(const std::string& filename, std::vector<int> &vec) {
 
 int main(){
     int duration = 0;
-    std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12};
-    // std::vector<int> nums;
+    // std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
-    // readIntegersFromFile("input1.txt", nums);
+    std::vector<int> nums;
+    readIntegersFromFile("input1.txt", nums);
 
     // nums = worstCaseQuickSelect();
 
@@ -157,7 +157,7 @@ int main(){
     // writeVectorToFile(nums,"outputworstcase.txt");
 
     std::vector<int> output;
-    readIntegersFromFile("heapsort4.txt",output);
+    readIntegersFromFile("quickselect1.txt",output);
 
     if (vectorsMatch(nums, output)) {
         std::cout << "Vectors match!" << std::endl;
