@@ -1,5 +1,5 @@
-#ifndef HEAP_SORT
-#define HEAP_SORT
+#ifndef HALF_HEAP_SORT
+#define HALF_HEAP_SORT
 
 #include <iostream>
 #include <vector>
