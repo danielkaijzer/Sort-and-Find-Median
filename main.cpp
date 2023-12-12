@@ -4,8 +4,8 @@
 #include "MergeSort.hpp"
 #include "InPlaceMergeSort.hpp"
 #include "HalfHeapSort.hpp"
-#include "QuickSelect.hpp"
-#include "MedianOfMedians.hpp"
+// #include "QuickSelect.hpp"
+#include "MedianOfMediansMethod.hpp"
 #include "WorstCaseQuickSelect.hpp"
 
 #include <iostream>
@@ -127,10 +127,10 @@ int main(){
 
 
     // DOESN'T MATCH OUTPUT
-    std::cout << "Half Heap Sort: \n";
-    std::cout << "Median: " << halfHeapSort(nums,duration) <<
-    std::endl << "Duration: " << duration << std::endl << std::endl;
-    int HalfHeapSort_Duration = duration;
+    // std::cout << "Half Heap Sort: \n";
+    // std::cout << "Median: " << halfHeapSort(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int HalfHeapSort_Duration = duration;
 
 
     // std::cout << "Full Heap Sort: \n";
@@ -149,27 +149,27 @@ int main(){
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int QuickSelect_Duration = duration;
 
-    // std::cout << "Median of Medians: \n";
-    // std::cout << "Median: " << medianOfMedians(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int MedianOfMedians = duration;
+    std::cout << "Median of Medians: \n";
+    std::cout << "Median: " << quickSelectM(nums,duration) <<
+    std::endl << "Duration: " << duration << std::endl << std::endl;
+    int MedianOfMedians = duration;
 
     // writeVectorToFile(nums,"outputworstcase.txt");
 
-    std::vector<int> output;
-    readIntegersFromFile("heapsort1.txt",output);
+    // std::vector<int> output;
+    // readIntegersFromFile("heapsort4.txt",output);
 
-    if (vectorsMatch(nums, output)) {
-        std::cout << "Vectors match!" << std::endl;
-    } else {
-        std::cout << "Vectors do not match." << std::endl;
-    }
+    // if (vectorsMatch(nums, output)) {
+    //     std::cout << "Vectors match!" << std::endl;
+    // } else {
+    //     std::cout << "Vectors do not match." << std::endl;
+    // }
 
-    for (int i = 0; i < nums.size(); ++i){
-        if (i < 3 || i > nums.size()-4)
-        std::cout << nums[i] << " ";
-    }
-    std::cout <<std::endl;
+    // for (int i = 0; i < nums.size(); ++i){
+    //     if (i < 3 || i > nums.size()-4)
+    //     std::cout << nums[i] << " ";
+    // }
+    // std::cout <<std::endl;
 
     // outputs for HEAPSORT
         // OUTPUT:  50492874 50624991 50579758 ... 57423279 86361348 92940355
