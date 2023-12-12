@@ -68,10 +68,10 @@ void quickSelectHelper(std::vector<int> &a, int left, int right, int k){
         // Recurse
         if (k <= i){
             quickSelectHelper(a, left, i-1,k);
-        // }
+        }
         else if(k > i+1){
             quickSelectHelper(a, i+1, right, k);
-        // }
+        }
     }
     else // do insertion sort on subarray
         InsertionSort(a, left, right);
@@ -81,7 +81,7 @@ void quickSelectHelper(std::vector<int> &a, int left, int right, int k){
 int quickSort( std::vector<int>& nums, int& duration){
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    int half = nums.size() / 2;
+    int half = (nums.size()-1) / 2;
 
     quickSelectHelper(nums, 0, nums.size()-1, half);
 

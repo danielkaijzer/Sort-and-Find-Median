@@ -33,12 +33,12 @@ If the hole's left child and right child are equal
 #include <chrono>
 #include <algorithm>
 
-void percDown(std::vector<int>& nums, int hole){
+void percDown ( std::vector<int>& heap, std::vector<int>::size_type hole ){
     int child;
 
-    int size = nums.size();
+    int size = heap.size();
 
-    nums[0] = std::move(nums[hole]); // move hole val into temp area
+    heap[0] = std::move(heap[hole]); // move hole val into temp area
 
     // keep checking children to see if any of them 
     // have values larger than current hole value
@@ -48,14 +48,14 @@ void percDown(std::vector<int>& nums, int hole){
 
         // if left child index isn't last index of array
         // and if right child is smaller than left child
-        if(child != size && nums[child+1] < nums[child]){
+        if(child != size && heap[child+1] < heap[child]){
             ++child; // right child is smallest child
         }
 
         // if smallest child < current hole value (at nums[0]),
         // update hole value
-        if(nums[child] < nums[0]){
-            nums[hole] = std::move(nums[child]);
+        if(heap[child] < heap[0]){
+            heap[hole] = std::move(heap[child]);
         }
         // else if largest child is less than value in hole 
         // OR we are at the end of the array
@@ -63,7 +63,7 @@ void percDown(std::vector<int>& nums, int hole){
             break;
     }
 
-    nums[hole] = std::move(nums[0]);
+    heap[hole] = std::move(heap[0]);
 }
 
 void buildHeap(std::vector<int>& heap){
