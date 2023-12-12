@@ -59,6 +59,8 @@ int halfHeapSort(std::vector<int> &nums, int &duration)
    // Record the start time for measuring the duration
    auto start_time = std::chrono::high_resolution_clock::now();
 
+   int median = (nums.size() - 1) / 2;
+
    // Duplicate the first element at the end of the vector
    nums.push_back(nums[0]);
 
@@ -66,10 +68,9 @@ int halfHeapSort(std::vector<int> &nums, int &duration)
    buildHeap(nums);
 
    // Calculate the middle index excluding the duplicated element
-   int middle = (nums.size() - 2) / 2;
 
    // Perform heap sort on the first half of the vector
-   for (int j = 0; j < middle; ++j)
+   for (int j = 0; j <= median-1; ++j)
    {
       // Replace the root with the last element and adjust the heap
       nums[1] = nums[nums.size() - 1];
