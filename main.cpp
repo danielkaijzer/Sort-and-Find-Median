@@ -6,6 +6,7 @@
 #include "HalfHeapSort.hpp"
 #include "QuickSelect.hpp"
 #include "MedianOfMedians.hpp"
+#include "WorstCaseQuickSelect.hpp"
 
 #include <iostream>
 #include <vector>
@@ -93,7 +94,9 @@ int main(){
     // std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12};
     std::vector<int> nums;
 
-    readIntegersFromFile("input4.txt", nums);
+    readIntegersFromFile("input1.txt", nums);
+
+    // nums = worstCaseQuickSelect();
 
 
 
@@ -129,6 +132,7 @@ int main(){
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int HalfHeapSort_Duration = duration;
 
+
     // std::cout << "Full Heap Sort: \n";
     // std::cout << "Median: " << HeapSort(nums,duration) <<
     // std::endl << "Duration: " << duration << std::endl << std::endl;
@@ -150,16 +154,16 @@ int main(){
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int MedianOfMedians = duration;
 
-    // writeVectorToFile(nums,"myheap1.txt");
+    // writeVectorToFile(nums,"outputworstcase.txt");
 
-    std::vector<int> output;
-    readIntegersFromFile("quickselect4.txt",output);
+    // std::vector<int> output;
+    // readIntegersFromFile("heapsort4.txt",output);
 
-    if (vectorsMatch(nums, output)) {
-        std::cout << "Vectors match!" << std::endl;
-    } else {
-        std::cout << "Vectors do not match." << std::endl;
-    }
+    // if (vectorsMatch(nums, output)) {
+    //     std::cout << "Vectors match!" << std::endl;
+    // } else {
+    //     std::cout << "Vectors do not match." << std::endl;
+    // }
 
     // for (int i = 0; i < nums.size(); ++i){
     //     if (i < 3 || i > nums.size()-4)

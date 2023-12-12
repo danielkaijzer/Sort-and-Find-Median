@@ -26,7 +26,7 @@ std::vector<int>::iterator median3(std::vector<int>& a, std::vector<int>::iterat
 
 
 std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<int>::iterator low, std::vector<int>::iterator high) {
-    // auto pivot = *(median3(nums,low,high));
+  
     auto pivot = *(high);
 
     auto i = low;
@@ -43,35 +43,30 @@ std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<in
             if(*i==pivot){++i;}
         }
     }
-
-    // std::iter_swap(i,high); // restore pivot
     std::swap(*i,*high);
     return i;
     
 }
 
-void quickSelectHelper(std::vector<int>& a, std::vector<int>::iterator left, std::vector<int>::iterator right) {
-    
-    auto median = a.begin()+ (a.size()-1)/2;
+void quickSelectHelper(std::vector<int>& a, std::vector<int>::iterator left, std::vector<int>::iterator right, std::vector<int>::iterator k){
 
-    // if (left + 10 <= right) {
+    if (left + 10 <= right) {
         auto p = median3(a,left,right);
         auto pivot = hoarePartition(a, left, p);
 
-        if (median < pivot){ // if median is less than pivot
-            quickSelectHelper(a, left, pivot-1);
+        if (k < pivot){ // if median is less than pivot
+            quickSelectHelper(a, left, pivot,k);
         }
-        else if (median > pivot){
-            quickSelectHelper(a, pivot, right); // works for odd size inputs
-            // quickSelectHelper(a, pivot+1, right-1); // works for odd size inputs
+        else if (k > pivot){
+            quickSelectHelper(a, pivot+1, right,k); // works for odd size inputs
         }
         else{ // median == pivot, done
             return;
         }
-    // } 
-    // else {
-    //     std::sort(left, right);
-    // }
+    } 
+    else {
+        std::sort(left, right);
+    }
 }
 
 int quickSelect(std::vector<int>& nums, int& duration) {
@@ -79,7 +74,7 @@ int quickSelect(std::vector<int>& nums, int& duration) {
 
     auto median = nums.begin()+ (nums.size()/2)-1;
 
-    quickSelectHelper(nums,nums.begin(),nums.end()-1);
+    quickSelectHelper(nums,nums.begin(),nums.end()-1, median);
 
     auto t2 = std::chrono::high_resolution_clock::now();
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);

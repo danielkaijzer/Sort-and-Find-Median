@@ -1,30 +1,3 @@
-/*
-Implement heapsort, as laid out in the textbook. 
-
-However, after building the heap, 
-you'll only have to remove n/2 elements from the heap rather than n, 
-which will hopefully cut down on the time significantly.
-
-Details: Before starting heapsort,
-take the first element in the vector (at index 0) 
-and move it to the back of the vector. 
-This will leave index 0 open, as per the textbook implementation.
-
-For heapsort, you don't have to use iterators.
-Using array subscripts is more efficient
-since you'll be doing a lot of arithmetic on indexes
-(e.g. doubling them to find the left child, halving to find the parent).
-
-At the end of the sort, 
-you should have deleted all elements smaller than but not including the median 
-- i.e. at the end of the sort, the median should be at the root of the remaining heap,
-and the remaining heap should be about half the size of the original vector.
-
-You do not need to move deleted elements to the back of the vector,
-or save them anywhere else. The vector should shrink in size as you delete elements.
-If the hole's left child and right child are equal
-(and the hole's value is greater than theirs), swap it with the left child.*/
-
 #ifndef HEAP_SORT
 #define HEAP_SORT
 
@@ -33,7 +6,7 @@ If the hole's left child and right child are equal
 #include <chrono>
 #include <algorithm>
 
-void percDown ( std::vector<int>& heap, std::vector<int>::size_type hole ){
+void percDown (std::vector<int>& heap, std::vector<int>::size_type hole ){
     int child;
 
     int size = heap.size();
@@ -95,10 +68,6 @@ int halfHeapSort ( std::vector<int>& nums, int& duration ){
         // Percolate down to restore minheap property
         percDown(nums,1);
     }
-
-    // if (even){
-    //     nums.pop_back();
-    // }
 
     // remove 0 index used for temp values, 
     // so vector goes back to original state

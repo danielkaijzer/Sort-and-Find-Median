@@ -2,29 +2,38 @@
 #define WORST_CASE_QUICKSELECT_HPP
 
 #include <iostream>
-#include <random>
+#include <vector>
+// #include <random>
 
 std::vector<int> worstCaseQuickSelect (void){
-    std::random_device rd;
-    std::mt19937 rng(rd());
+    // std::random_device rd;
+    // std::mt19937 rng(rd());
     int min = 1;
     int max = 20000;
-    std::uniform_int_distribution<int> dist(min, max);
+    // std::uniform_int_distribution<int> dist(min, max-1);
 
     std::vector<int> data;
 
     int size = 20000;
 
-    data.push_back(max); // max will be first element
+    // data.push_back(max); // max will be first element
 
-    for (int i = 1; i < size-1; ++i){
+    // for (int i = 1; i < size-1; ++i){
 
-        data.push_back(dist(rng));
+    //     data.push_back(dist(rng));
+    // }
+
+
+    for (int i = 20000; i > 0; --i){
+
+        data.push_back(i);
     }
 
-    data[size/2] = max; // make median index the max value
+    // std::cout << data.size() << std::endl;
 
-    data.push_back(max); // max will be last element
+    // data[size/2] = max; // make median index the max value
+
+    // data.push_back(max); // max will be last element
 
     return data;
 }
