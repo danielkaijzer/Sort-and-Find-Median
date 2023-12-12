@@ -13,7 +13,7 @@
 void percDown(std::vector<int> &heap, std::vector<int>::size_type hole)
 {
    // Temporary variable to hold the value being moved down
-   int temp = heap[0];
+   // int temp = heap[0];
    int child;
 
    // Iterate through the heap starting from the root
@@ -27,7 +27,7 @@ void percDown(std::vector<int> &heap, std::vector<int>::size_type hole)
       }
 
       // Move the smaller child up if it is smaller than the temporary value
-      if (temp > heap[child])
+      if (heap[0] > heap[child])
       {
          heap[hole] = heap[child];
       }
@@ -38,7 +38,7 @@ void percDown(std::vector<int> &heap, std::vector<int>::size_type hole)
    }
 
    // Place the temporary value in the correct position
-   heap[hole] = temp;
+   heap[hole] = heap[0];
 }
 
 // Implementation of building a heap from the input vector
@@ -65,10 +65,10 @@ int halfHeapSort(std::vector<int> &nums, int &duration)
    nums.push_back(nums[0]);
    median--;
 
-   // Build a heap from the vector
+   // PART 1: BUILDHEAP
    buildHeap(nums);
 
-   // Perform heap sort on the first half of the vector
+   // PART 2: DELETEMAX()
    for (int j = 0; j <= median; ++j)
    {
       // Replace the root with the last element and adjust the heap
@@ -77,7 +77,6 @@ int halfHeapSort(std::vector<int> &nums, int &duration)
       nums.pop_back();
       percDown(nums, 1);
    }
-
    nums.erase(nums.begin()); // remove 0 index used as temp
 
    auto end_time = std::chrono::high_resolution_clock::now();
