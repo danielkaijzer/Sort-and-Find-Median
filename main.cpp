@@ -15,7 +15,7 @@
 // Median: 50492874, 50173306
 
 bool vectorsMatch(const std::vector<int>& vector1, const std::vector<int>& vector2) {
-    char median[] = "50173306";
+    char median[] = "50492874";
     
     // Check if the lengths of the vectors are the same
     if (vector1.size() != vector2.size()) {
