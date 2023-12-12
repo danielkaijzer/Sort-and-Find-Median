@@ -14,29 +14,29 @@
 
 // Median: 50492874, 50173306
 
-bool vectorsMatch(const std::vector<int>& vector1, const std::vector<int>& vector2) {
+bool vectorsMatch(const std::vector<int>& myoutput, const std::vector<int>& expected) {
     char median[] = "50492874";
     
     // Check if the lengths of the vectors are the same
-    if (vector1.size() != vector2.size()) {
-        std::cout << vector1.size() <<"\n";
-        std::cout << vector2.size() <<"\n";
+    if (((myoutput.size())-1) != expected.size()) {
+        std::cout << myoutput.size() <<"\n";
+        std::cout << expected.size() <<"\n";
         return false;
     }
     else{
-        std::cout << "vector size matches\n size: " << vector1.size() << "\n";
+        std::cout << "vector size matches\n size: " << myoutput.size() << "\n";
     }
 
     bool test = true;
 
     // Compare each element of the vectors
-    for (size_t i = 0; i < vector1.size(); ++i) {
-        if (vector1[i] != vector2[i] && test == true) {
-            std::cout << "index " << i << " in vector1 has value: " << vector1[i] << std::endl;
-            std::cout << "index " << i << " in vector2 has value: " << vector2[i] << std::endl;
+    for (size_t i = 0; i < expected.size(); ++i) {
+        if (myoutput[i+1] != expected[i] && test == true) {
+            std::cout << "index " << i << " in my output has value: " << myoutput[i+1] << std::endl;
+            std::cout << "index " << i << " in expected output has value: " << expected[i] << std::endl;
             test = false;
         }
-        if (vector1[i] == std::atoi(median)){
+        if (myoutput[i] == std::atoi(median)){
             std::cout << "index of median: " << i << std::endl;
         }
     }
@@ -94,7 +94,7 @@ int main(){
     // std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
     std::vector<int> nums;
-    readIntegersFromFile("input1.txt", nums);
+    readIntegersFromFile("input4.txt", nums);
 
     // nums = worstCaseQuickSelect();
 
@@ -127,10 +127,10 @@ int main(){
 
 
     // DOESN'T MATCH OUTPUT
-    // std::cout << "Half Heap Sort: \n";
-    // std::cout << "Median: " << halfHeapSort(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int HalfHeapSort_Duration = duration;
+    std::cout << "Half Heap Sort: \n";
+    std::cout << "Median: " << halfHeapSort(nums,duration) <<
+    std::endl << "Duration: " << duration << std::endl << std::endl;
+    int HalfHeapSort_Duration = duration;
 
 
     // std::cout << "Full Heap Sort: \n";
@@ -149,21 +149,21 @@ int main(){
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int QuickSelect_Duration = duration;
 
-    std::cout << "Median of Medians: \n";
-    std::cout << "Median: " << quickSelectM(nums,duration) <<
-    std::endl << "Duration: " << duration << std::endl << std::endl;
-    int MedianOfMedians = duration;
+    // std::cout << "Median of Medians: \n";
+    // std::cout << "Median: " << quickSelectM(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int MedianOfMedians = duration;
 
     // writeVectorToFile(nums,"outputworstcase.txt");
 
-    // std::vector<int> output;
-    // readIntegersFromFile("heapsort4.txt",output);
+    std::vector<int> output;
+    readIntegersFromFile("heapsort4.txt",output);
 
-    // if (vectorsMatch(nums, output)) {
-    //     std::cout << "Vectors match!" << std::endl;
-    // } else {
-    //     std::cout << "Vectors do not match." << std::endl;
-    // }
+    if (vectorsMatch(nums, output)) {
+        std::cout << "Vectors match!" << std::endl;
+    } else {
+        std::cout << "Vectors do not match." << std::endl;
+    }
 
     // for (int i = 0; i < nums.size(); ++i){
     //     if (i < 3 || i > nums.size()-4)

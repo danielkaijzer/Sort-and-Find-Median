@@ -61,33 +61,32 @@ int halfHeapSort(std::vector<int> &nums, int &duration)
 {
    auto t1 = std::chrono::high_resolution_clock::now();
 
-   // median for odd and even sized inputs
-   int median = (nums.size() - 1) / 2;
 
-   // Duplicate the first element at the end of the vector so I can use 1-based indexing
+   int middle = (nums.size() - 1) / 2;
+
+   // Duplicate the first element at the end of the vector
    nums.push_back(nums[0]);
-   median--;
 
-   // PART 1: BUILDHEAP
+   // Build a heap from the vector
    buildHeap(nums);
 
-   // PART 2: DELETEMAX()
-   for (int j = 0; j <= median; ++j)
+   // Calculate the middle index excluding the duplicated element
+
+   // Perform heap sort on the first half of the vector
+   for (int j = 0; j < middle; ++j)
    {
       // Replace the root with the last element and adjust the heap
-      nums[1] = nums[nums.size() - 1];
-      nums[0] = nums[1]; // for percDown precondition
+      nums[0] = nums[nums.size() - 1];
       nums.pop_back();
       percDown(nums, 1);
    }
-   // nums.erase(nums.begin()); // remove 0 index used as temp
 
     auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
     duration = dur.count();
 
    // Return the smallest element in the sorted array
-   return nums[0];
+   return nums[1];
 }
 
 #endif
