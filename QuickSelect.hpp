@@ -11,14 +11,10 @@ std::vector<int>::iterator median3(std::vector<int>& a, std::vector<int>::iterat
 
     // Checking for center
     if ((*low < *center && *center < *high) || (*high < *center && *center < *low))
-    //    std::iter_swap(center,high);
         std::swap(*center,*high);
     // Checking for left
     else if ((*center < *low && *low < *high) || (*high < *low && *low < *center))
-    //    std::iter_swap(low,high);
         std::swap(*low,*high);
-
- 
     else{} // return right
         return high;
 }
@@ -26,7 +22,6 @@ std::vector<int>::iterator median3(std::vector<int>& a, std::vector<int>::iterat
 
 
 std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<int>::iterator low, std::vector<int>::iterator high) {
-    // auto pivot = median3(nums,low,high);
     auto pivot = *(high);
 
     auto i = low;
@@ -43,27 +38,23 @@ std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<in
             if(*i==pivot){++i;}
         }
     }
-
-    // std::iter_swap(i,high); // restore pivot
-    std::swap(*i,*high);
+    std::swap(*i,*high); // restore pivot
     return i;
     
 }
 
 void quickSelectHelper(std::vector<int>& a, std::vector<int>::iterator left, std::vector<int>::iterator right, std::vector<int>::iterator k) {
-
-    // auto median = a.begin() + (a.size()-1)/2;
     
     if (left + 10 <= right) {
-        auto pivot = median3(a,left,right);
+        auto p = median3(a,left,right);
 
-        auto median = hoarePartition(a, left, pivot);
+        auto pivot = hoarePartition(a, left, p);
 
-        if (median <= k){ // if median is less than pivot
-            quickSelectHelper(a, left, pivot, median-1);
+        if (pivot <= k){ // if median is less than pivot
+            quickSelectHelper(a, left, p, pivot-1);
         }
-        else if (k+1 < pivot){
-            quickSelectHelper(a, pivot+1, right,median);
+        else if (p > k+1){
+            quickSelectHelper(a, p+1, right,pivot);
         }
         else{ // median == pivot, done
             return;

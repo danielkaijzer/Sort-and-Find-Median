@@ -91,10 +91,10 @@ void readIntegersFromFile(const std::string& filename, std::vector<int> &vec) {
 
 int main(){
     int duration = 0;
-    // std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12};
-    std::vector<int> nums;
+    std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12};
+    // std::vector<int> nums;
 
-    readIntegersFromFile("input1.txt", nums);
+    // readIntegersFromFile("input1.txt", nums);
 
     // nums = worstCaseQuickSelect();
 
@@ -156,20 +156,20 @@ int main(){
 
     // writeVectorToFile(nums,"outputworstcase.txt");
 
-    // std::vector<int> output;
-    // readIntegersFromFile("heapsort4.txt",output);
+    std::vector<int> output;
+    readIntegersFromFile("heapsort4.txt",output);
 
-    // if (vectorsMatch(nums, output)) {
-    //     std::cout << "Vectors match!" << std::endl;
-    // } else {
-    //     std::cout << "Vectors do not match." << std::endl;
-    // }
+    if (vectorsMatch(nums, output)) {
+        std::cout << "Vectors match!" << std::endl;
+    } else {
+        std::cout << "Vectors do not match." << std::endl;
+    }
 
-    // for (int i = 0; i < nums.size(); ++i){
-    //     if (i < 3 || i > nums.size()-4)
-    //     std::cout << nums[i] << " ";
-    // }
-    // std::cout <<std::endl;
+    for (int i = 0; i < nums.size(); ++i){
+        if (i < 3 || i > nums.size()-4)
+        std::cout << nums[i] << " ";
+    }
+    std::cout <<std::endl;
 
     // outputs for HEAPSORT
         // OUTPUT:  50492874 50624991 50579758 ... 57423279 86361348 92940355
