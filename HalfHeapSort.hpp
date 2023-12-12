@@ -7,6 +7,9 @@
 #include <chrono>
 
 // Implementation of the "percDown" operation in the heap
+// parameter "hole" is the index of the hole.
+// percDown precondition: value to be inserted into hole is stored in heap at index 0. The hole itself may be in an unspecified state - i.e. it doesn't matter what's in it since you'll be overwriting it anyway.
+// percDown postcondition: hole has been moved into correct place and value has been inserted into hole.
 void percDown(std::vector<int> &heap, std::vector<int>::size_type hole)
 {
    // Temporary variable to hold the value being moved down
@@ -69,7 +72,8 @@ int halfHeapSort(std::vector<int> &nums, int &duration)
    for (int j = 0; j < middle; ++j)
    {
       // Replace the root with the last element and adjust the heap
-      nums[0] = nums[nums.size() - 1];
+      nums[1] = nums[nums.size() - 1];
+      nums[0] = nums[1];
       nums.pop_back();
       percDown(nums, 1);
    }
