@@ -90,9 +90,12 @@ void readIntegersFromFile(const std::string& filename, std::vector<int> &vec) {
 
 int main(){
     int duration = 0;
+    // std::vector<int> nums {999,1,2,3,4,5,6,7,8,9,10,11};
     std::vector<int> nums;
 
     readIntegersFromFile("input1.txt", nums);
+
+
 
     // std::cout << "Standard Sort: \n";
     // std::cout << "Median: " << standardSort(nums,duration) <<
@@ -104,10 +107,10 @@ int main(){
     // writeVectorToFile(nums, sorted_output);
 
 
-    // std::cout << "Half Selection Sort: \n";
-    // std::cout << "Median: " << halfSelectionSort(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int halfSelection_Duration = duration;
+    std::cout << "Half Selection Sort: \n";
+    std::cout << "Median: " << halfSelectionSort(nums,duration) <<
+    std::endl << "Duration: " << duration << std::endl << std::endl;
+    int halfSelection_Duration = duration;
 
     // std::cout << "Merge Sort: \n";
     // std::cout << "Median: " << mergeSort(nums,duration) <<
@@ -121,10 +124,10 @@ int main(){
 
 
     // DOESN'T MATCH OUTPUT
-    std::cout << "Half Heap Sort: \n";
-    std::cout << "Median: " << halfHeapSort(nums,duration) <<
-    std::endl << "Duration: " << duration << std::endl << std::endl;
-    int HalfHeapSort_Duration = duration;
+    // std::cout << "Half Heap Sort: \n";
+    // std::cout << "Median: " << halfHeapSort(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int HalfHeapSort_Duration = duration;
 
     // std::cout << "Full Heap Sort: \n";
     // std::cout << "Median: " << HeapSort(nums,duration) <<
@@ -147,8 +150,10 @@ int main(){
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int MedianOfMedians = duration;
 
+    // writeVectorToFile(nums,"myheap1.txt");
+
     std::vector<int> output;
-    readIntegersFromFile("heapsort1.txt",output);
+    readIntegersFromFile("selectionsort1.txt",output);
     // readIntegersFromFile("heapsort4.txt",output);
 
     if (vectorsMatch(nums, output)) {
@@ -157,11 +162,11 @@ int main(){
         std::cout << "Vectors do not match." << std::endl;
     }
 
-    for (int i = 0; i < nums.size(); ++i){
-        if (i < 3 || i > nums.size()-4)
-        std::cout << nums[i] << " ";
-    }
-    std::cout <<std::endl;
+    // for (int i = 0; i < nums.size(); ++i){
+    //     if (i < 3 || i > nums.size()-4)
+    //     std::cout << nums[i] << " ";
+    // }
+    // std::cout <<std::endl;
 
     // outputs for HEAPSORT
         // OUTPUT:  50492874 50624991 50579758 ... 57423279 86361348 92940355

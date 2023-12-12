@@ -14,9 +14,10 @@ int halfSelectionSort ( std::vector<int>& nums, int& duration){
         return -1;
     }
 
-    int half = nums.size()/2;
 
-    for (int i = 0; i <= half-1; ++i){
+    int half = (nums.size()-1)/2;
+
+    for (int i = 0; i <= half; ++i){
         int min_index = i;
 
         for (int j = i+1; j < nums.size(); ++j){
@@ -40,7 +41,8 @@ int halfSelectionSort ( std::vector<int>& nums, int& duration){
 
     // return nums[half];
     // Return the index of the median (lesser of the two middle elements)
-        return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
+        // return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
+        return nums[(nums.size()-1)/2];
 }
 
 #endif
