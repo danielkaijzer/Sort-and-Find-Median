@@ -56,34 +56,32 @@ void buildHeap(std::vector<int> &heap)
 // Implementation of HalfHeapSort
 int halfHeapSort(std::vector<int> &nums, int &duration)
 {
-   // Record the start time for measuring the duration
    auto start_time = std::chrono::high_resolution_clock::now();
 
+   // median for odd and even sized inputs
    int median = (nums.size() - 1) / 2;
 
-   // Duplicate the first element at the end of the vector
+   // Duplicate the first element at the end of the vector so I can use 1-based indexing
    nums.push_back(nums[0]);
+   median--;
 
    // Build a heap from the vector
    buildHeap(nums);
 
-   // Calculate the middle index excluding the duplicated element
-
    // Perform heap sort on the first half of the vector
-   for (int j = 0; j <= median-1; ++j)
+   for (int j = 0; j <= median; ++j)
    {
       // Replace the root with the last element and adjust the heap
       nums[1] = nums[nums.size() - 1];
-      nums[0] = nums[1];
+      nums[0] = nums[1]; // for percDown precondition
       nums.pop_back();
       percDown(nums, 1);
    }
 
-   nums.erase(nums.begin());
+   nums.erase(nums.begin()); // remove 0 index used as temp
 
-   // Record the end time and calculate the duration
    auto end_time = std::chrono::high_resolution_clock::now();
-   duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+   duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count();
 
    // Return the smallest element in the sorted array
    return nums[0];
