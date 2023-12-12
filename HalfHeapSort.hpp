@@ -12,21 +12,22 @@
 // percDown postcondition: hole has been moved into correct place and value has been inserted into hole.
 void percDown(std::vector<int> &heap, std::vector<int>::size_type hole)
 {
-   // Temporary variable to hold the value being moved down
-   // int temp = heap[0];
    int child;
 
    // Iterate through the heap starting from the root
    for (; hole * 2 < heap.size(); hole = child)
    {
       // Find the child with the smaller value
-      child = hole * 2;
+
+      child = hole * 2; // make left child the child
+
+      // check if right child is smaller than left, 
       if (child + 1 < heap.size() && heap[child + 1] < heap[child])
       {
-         ++child;
+         ++child; // if so make right the child
       }
 
-      // Move the smaller child up if it is smaller than the temporary value
+      // Move the smaller child up if smaller than the temp value
       if (heap[0] > heap[child])
       {
          heap[hole] = heap[child];
@@ -37,7 +38,7 @@ void percDown(std::vector<int> &heap, std::vector<int>::size_type hole)
       }
    }
 
-   // Place the temporary value in the correct position
+   // Place the temp value in correct position after percolating down to correct position
    heap[hole] = heap[0];
 }
 
@@ -74,8 +75,8 @@ int halfHeapSort(std::vector<int> &nums, int &duration)
       // Replace the root with the last element and adjust the heap
       nums[1] = nums[nums.size() - 1];
       nums[0] = nums[1]; // for percDown precondition
-      nums.pop_back();
       percDown(nums, 1);
+      nums.pop_back();
    }
    nums.erase(nums.begin()); // remove 0 index used as temp
 
