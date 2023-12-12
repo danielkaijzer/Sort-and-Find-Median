@@ -1,85 +1,91 @@
-#ifndef HALF_HEAP_SORT
-#define HALF_HEAP_SORT
-
-#include <iostream>
 #include <vector>
-#include <chrono>
 #include <algorithm>
+#include <iostream>
+#include <chrono>
 
-void percDown (std::vector<int>& heap, std::vector<int>::size_type hole ){
-    int child;
+// Function to perform HalfHeapSort
+int halfHeapSort(std::vector<int>& nums, int& duration);
 
-    int size = heap.size();
+// Function to perform the "percDown" operation in the heap
+void percDown(std::vector<int>& heap, std::vector<int>::size_type hole);
 
-    heap[0] = std::move(heap[hole]); // move hole val into temp area
+// Function to build a heap from the input vector
+void buildHeap(std::vector<int>& heap);
 
-    // keep checking children to see if any of them 
-    // have values larger than current hole value
-    // if so, swap current hole and largest child
-    for (; hole*2 <= size; hole = child){
-        child = hole*2; // make child current left child of hole
+// Implementation of HalfHeapSort
+int halfHeapSort(std::vector<int> &nums, int &duration)
+{
+   // Record the start time for measuring the duration
+   auto start_time = std::chrono::high_resolution_clock::now();
 
-        // if left child index isn't last index of array
-        // and if right child is smaller than left child
-        if(child != size && heap[child+1] < heap[child]){
-            ++child; // right child is smallest child
-        }
+   // Duplicate the first element at the end of the vector
+   nums.push_back(nums[0]);
 
-        // if smallest child < current hole value (at nums[0]),
-        // update hole value
-        if(heap[child] < heap[0]){
-            heap[hole] = std::move(heap[child]);
-        }
-        // else if largest child is less than value in hole 
-        // OR we are at the end of the array
-        else 
-            break;
-    }
+   // Build a heap from the vector
+   buildHeap(nums);
 
-    heap[hole] = std::move(heap[0]);
+   // Calculate the middle index excluding the duplicated element
+   int middle = (nums.size() - 2) / 2;
+
+   // Perform heap sort on the first half of the vector
+   for (int j = 0; j < middle; ++j)
+   {
+      // Replace the root with the last element and adjust the heap
+      nums[0] = nums[nums.size() - 1];
+      nums.pop_back();
+      percDown(nums, 1);
+   }
+
+   nums.erase(nums.begin());
+
+   // Record the end time and calculate the duration
+   auto end_time = std::chrono::high_resolution_clock::now();
+   duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+
+   // Return the smallest element in the sorted array
+   return nums[0];
 }
 
-void buildHeap(std::vector<int>& heap){
-    int median = heap.size() % 2 == 0 ? heap.size() / 2: heap.size() / 2;
+// Implementation of the "percDown" operation in the heap
+void percDown(std::vector<int> &heap, std::vector<int>::size_type hole)
+{
+   // Temporary variable to hold the value being moved down
+   int temp = heap[0];
+   int child;
 
-    for (int i = median-1; i >0; --i){
-        percDown(heap, i);
-    }
+   // Iterate through the heap starting from the root
+   for (; hole * 2 < heap.size(); hole = child)
+   {
+      // Find the child with the smaller value
+      child = hole * 2;
+      if (child + 1 < heap.size() && heap[child + 1] < heap[child])
+      {
+         ++child;
+      }
+
+      // Move the smaller child up if it is smaller than the temporary value
+      if (temp > heap[child])
+      {
+         heap[hole] = heap[child];
+      }
+      else
+      {
+         break;
+      }
+   }
+
+   // Place the temporary value in the correct position
+   heap[hole] = temp;
 }
 
-int halfHeapSort ( std::vector<int>& nums, int& duration ){
-    auto t1 = std::chrono::high_resolution_clock::now();
-
-    // int median = nums.size() % 2 == 0 ? nums.size() / 2-1: nums.size() / 2;
-    int median = (nums.size()-1)/2;
-
-    // bool even = nums.size() % 2 == 0 ? true: false;
-
-    nums.push_back(nums[0]); // free up index 0
-        
-    // PHASE 1: BUILD (MIN)HEAP
-    buildHeap(nums);
-
-    // PHASE 2: DELETEMIN()
-
-    for (int j = median+1; j > 1; --j){
-        nums[1] = std::move(nums[nums.size()-1]);
-        nums.pop_back(); // --j
-        // Percolate down to restore minheap property
-        percDown(nums,1);
-    }
-
-    // remove 0 index used for temp values, 
-    // so vector goes back to original state
-    nums.erase(nums.begin());
-
-    auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
-    auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);
-    duration = dur.count();
-
-    // return median at root
-    return nums[0]; // Median: 50 492 874, 50173306
+// Implementation of building a heap from the input vector
+void buildHeap(std::vector<int> &heap)
+{
+   // Iterate through the non-leaf elements of the heap
+   for (int i = (heap.size() - 1) / 2; i > 0; --i)
+   {
+      // Move the current element down to its correct position
+      heap[0] = heap[i];
+      percDown(heap, i);
+   }
 }
-
-
-#endif
