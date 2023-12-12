@@ -29,25 +29,8 @@ std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<in
     // auto pivot = median3(nums,low,high);
     auto pivot = *(high);
 
-    // auto i = low-1;
-    // auto j = high;
-
     auto i = low;
     auto j = high-1;
-
-    // for (;;){
-    //     while(*++i < *pivot);
-    //     while(*--j > *pivot);
-        
-    //     // if i is still before j in vector but has greater value, swap
-    //     if (i < j ){
-    //         std::iter_swap(i,j);
-    //     }
-    //     else
-    //         break;
-    // }
-
-    //v2
 
     while(i<j){
         while(*i<pivot){++i;}

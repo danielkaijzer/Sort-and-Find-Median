@@ -93,7 +93,7 @@ int main(){
     // std::vector<int> nums {999,1,2,3,4,5,6,7,8,9,10,11};
     std::vector<int> nums;
 
-    readIntegersFromFile("input1.txt", nums);
+    readIntegersFromFile("input4.txt", nums);
 
 
 
@@ -124,10 +124,10 @@ int main(){
 
 
     // DOESN'T MATCH OUTPUT
-    // std::cout << "Half Heap Sort: \n";
-    // std::cout << "Median: " << halfHeapSort(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int HalfHeapSort_Duration = duration;
+    std::cout << "Half Heap Sort: \n";
+    std::cout << "Median: " << halfHeapSort(nums,duration) <<
+    std::endl << "Duration: " << duration << std::endl << std::endl;
+    int HalfHeapSort_Duration = duration;
 
     // std::cout << "Full Heap Sort: \n";
     // std::cout << "Median: " << HeapSort(nums,duration) <<
@@ -135,10 +135,10 @@ int main(){
     // int heapSort_Duration = duration;
 
     // DOESN'T MATCH OUTPUT
-    std::cout << "QuickSelect: \n";
-    std::cout << "Median: " << quickSelect(nums,duration) <<
-    std::endl << "Duration: " << duration << std::endl << std::endl;
-    int QuickSelect_Duration = duration;
+    // std::cout << "QuickSelect: \n";
+    // std::cout << "Median: " << quickSelect(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int QuickSelect_Duration = duration;
 
     // std::cout << "Quicksort: \n";
     // std::cout << "Median: " << quickSort(nums,duration) <<
@@ -152,15 +152,15 @@ int main(){
 
     // writeVectorToFile(nums,"myheap1.txt");
 
-    // std::vector<int> output;
+    std::vector<int> output;
     // readIntegersFromFile("selectionsort1.txt",output);
-    // // readIntegersFromFile("heapsort4.txt",output);
+    readIntegersFromFile("heapsort4.txt",output);
 
-    // if (vectorsMatch(nums, output)) {
-    //     std::cout << "Vectors match!" << std::endl;
-    // } else {
-    //     std::cout << "Vectors do not match." << std::endl;
-    // }
+    if (vectorsMatch(nums, output)) {
+        std::cout << "Vectors match!" << std::endl;
+    } else {
+        std::cout << "Vectors do not match." << std::endl;
+    }
 
     // for (int i = 0; i < nums.size(); ++i){
     //     if (i < 3 || i > nums.size()-4)

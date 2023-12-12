@@ -33,7 +33,7 @@ If the hole's left child and right child are equal
 #include <chrono>
 #include <algorithm>
 
-void percolateDown(std::vector<int>& nums, int hole){
+void percDown(std::vector<int>& nums, int hole){
     int child;
 
     int size = nums.size();
@@ -70,11 +70,11 @@ void buildHeap(std::vector<int>& heap){
     int median = heap.size() % 2 == 0 ? heap.size() / 2: heap.size() / 2;
 
     for (int i = median-1; i >0; --i){
-        percolateDown(heap, i);
+        percDown(heap, i);
     }
 }
 
-int halfHeapSort ( std::vector<int>& nums, int& duration){
+int halfHeapSort ( std::vector<int>& nums, int& duration ){
     auto t1 = std::chrono::high_resolution_clock::now();
 
     // int median = nums.size() % 2 == 0 ? nums.size() / 2-1: nums.size() / 2;
@@ -93,7 +93,7 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
         nums[1] = std::move(nums[nums.size()-1]);
         nums.pop_back(); // --j
         // Percolate down to restore minheap property
-        percolateDown(nums,1);
+        percDown(nums,1);
     }
 
     // if (even){
