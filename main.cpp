@@ -93,7 +93,7 @@ int main(){
     // std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12};
     std::vector<int> nums;
 
-    readIntegersFromFile("input1.txt", nums);
+    readIntegersFromFile("input4.txt", nums);
 
 
 
@@ -152,14 +152,14 @@ int main(){
 
     // writeVectorToFile(nums,"myheap1.txt");
 
-    // std::vector<int> output;
-    // readIntegersFromFile("quickselect1.txt",output);
+    std::vector<int> output;
+    readIntegersFromFile("quickselect4.txt",output);
 
-    // if (vectorsMatch(nums, output)) {
-    //     std::cout << "Vectors match!" << std::endl;
-    // } else {
-    //     std::cout << "Vectors do not match." << std::endl;
-    // }
+    if (vectorsMatch(nums, output)) {
+        std::cout << "Vectors match!" << std::endl;
+    } else {
+        std::cout << "Vectors do not match." << std::endl;
+    }
 
     // for (int i = 0; i < nums.size(); ++i){
     //     if (i < 3 || i > nums.size()-4)

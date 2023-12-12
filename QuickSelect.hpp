@@ -26,8 +26,8 @@ std::vector<int>::iterator median3(std::vector<int>& a, std::vector<int>::iterat
 
 
 std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<int>::iterator low, std::vector<int>::iterator high) {
-    auto pivot = *(median3(nums,low,high));
-    // auto pivot = *(high);
+    // auto pivot = *(median3(nums,low,high));
+    auto pivot = *(high);
 
     auto i = low;
     auto j = high-1;
@@ -52,17 +52,18 @@ std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<in
 
 void quickSelectHelper(std::vector<int>& a, std::vector<int>::iterator left, std::vector<int>::iterator right) {
     
-    auto median = a.begin()+ a.size()/2-1;
+    auto median = a.begin()+ (a.size()-1)/2;
 
     // if (left + 10 <= right) {
-        // auto p = median3(a,left,right);
-        auto pivot = hoarePartition(a, left, right);
+        auto p = median3(a,left,right);
+        auto pivot = hoarePartition(a, left, p);
 
         if (median < pivot){ // if median is less than pivot
             quickSelectHelper(a, left, pivot-1);
         }
         else if (median > pivot){
-            quickSelectHelper(a, pivot+1, right-1);
+            quickSelectHelper(a, pivot, right); // works for odd size inputs
+            // quickSelectHelper(a, pivot+1, right-1); // works for odd size inputs
         }
         else{ // median == pivot, done
             return;

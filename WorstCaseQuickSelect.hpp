@@ -1,10 +1,10 @@
-#ifndef WORST_DATA_SET_GENERATOR
-#define WORST_DATA_SET_GENERATOR
+#ifndef WORST_CASE_QUICKSELECT_HPP
+#define WORST_CASE_QUICKSELECT_HPP
 
 #include <iostream>
 #include <random>
 
-std::vector<int> generateWorstDataSet(int size){
+std::vector<int> worstCaseQuickSelect (void){
     std::random_device rd;
     std::mt19937 rng(rd());
     int min = 1;
@@ -12,6 +12,8 @@ std::vector<int> generateWorstDataSet(int size){
     std::uniform_int_distribution<int> dist(min, max);
 
     std::vector<int> data;
+
+    int size = 20000;
 
     data.push_back(max); // max will be first element
 
