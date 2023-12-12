@@ -54,7 +54,7 @@ void quickSelectHelper(std::vector<int>& a, std::vector<int>::iterator left, std
             quickSelectHelper(a, left, p, pivot-1);
         }
         else if (p > k+1){
-            quickSelectHelper(a, p+1, right,pivot);
+            quickSelectHelper(a, pivot+1, right,pivot);
         }
         else{ // median == pivot, done
             return;
