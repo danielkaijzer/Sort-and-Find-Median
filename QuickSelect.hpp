@@ -20,9 +20,6 @@ std::vector<int>::iterator median3(std::vector<int>::iterator& low, std::vector<
 }
 
 
-
-
-
 std::vector<int>::iterator hoarePartition(std::vector<int>& nums, std::vector<int>::iterator low, std::vector<int>::iterator high) {
     // Choose the pivot as the median of three values
     auto pivot = median3(low, high);

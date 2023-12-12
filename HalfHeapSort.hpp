@@ -1,50 +1,10 @@
+#ifndef HALF_HEAP_SORT
+#define HALF_HEAP_SORT
+
 #include <vector>
 #include <algorithm>
 #include <iostream>
 #include <chrono>
-
-// Function to perform HalfHeapSort
-int halfHeapSort(std::vector<int>& nums, int& duration);
-
-// Function to perform the "percDown" operation in the heap
-void percDown(std::vector<int>& heap, std::vector<int>::size_type hole);
-
-// Function to build a heap from the input vector
-void buildHeap(std::vector<int>& heap);
-
-// Implementation of HalfHeapSort
-int halfHeapSort(std::vector<int> &nums, int &duration)
-{
-   // Record the start time for measuring the duration
-   auto start_time = std::chrono::high_resolution_clock::now();
-
-   // Duplicate the first element at the end of the vector
-   nums.push_back(nums[0]);
-
-   // Build a heap from the vector
-   buildHeap(nums);
-
-   // Calculate the middle index excluding the duplicated element
-   int middle = (nums.size() - 2) / 2;
-
-   // Perform heap sort on the first half of the vector
-   for (int j = 0; j < middle; ++j)
-   {
-      // Replace the root with the last element and adjust the heap
-      nums[0] = nums[nums.size() - 1];
-      nums.pop_back();
-      percDown(nums, 1);
-   }
-
-   nums.erase(nums.begin());
-
-   // Record the end time and calculate the duration
-   auto end_time = std::chrono::high_resolution_clock::now();
-   duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
-
-   // Return the smallest element in the sorted array
-   return nums[0];
-}
 
 // Implementation of the "percDown" operation in the heap
 void percDown(std::vector<int> &heap, std::vector<int>::size_type hole)
@@ -89,3 +49,39 @@ void buildHeap(std::vector<int> &heap)
       percDown(heap, i);
    }
 }
+
+// Implementation of HalfHeapSort
+int halfHeapSort(std::vector<int> &nums, int &duration)
+{
+   // Record the start time for measuring the duration
+   auto start_time = std::chrono::high_resolution_clock::now();
+
+   // Duplicate the first element at the end of the vector
+   nums.push_back(nums[0]);
+
+   // Build a heap from the vector
+   buildHeap(nums);
+
+   // Calculate the middle index excluding the duplicated element
+   int middle = (nums.size() - 2) / 2;
+
+   // Perform heap sort on the first half of the vector
+   for (int j = 0; j < middle; ++j)
+   {
+      // Replace the root with the last element and adjust the heap
+      nums[0] = nums[nums.size() - 1];
+      nums.pop_back();
+      percDown(nums, 1);
+   }
+
+   nums.erase(nums.begin());
+
+   // Record the end time and calculate the duration
+   auto end_time = std::chrono::high_resolution_clock::now();
+   duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+
+   // Return the smallest element in the sorted array
+   return nums[0];
+}
+
+#endif

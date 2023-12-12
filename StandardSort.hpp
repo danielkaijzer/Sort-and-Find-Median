@@ -9,7 +9,7 @@
 int standardSort ( std::vector<int>& nums, int& duration){
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    int half = nums.size()/2;
+    int half = (nums.size()-1)/2;
 
     std::sort(nums.begin(), nums.end());
 
@@ -19,7 +19,7 @@ int standardSort ( std::vector<int>& nums, int& duration){
     duration = dur.count();
     
     // Return the index of the median (lesser of the two middle elements)
-        return nums[nums.size() % 2 == 0 ? nums.size() / 2 - 1 : nums.size() / 2];
+        return nums[half];
 }
 
 #endif
