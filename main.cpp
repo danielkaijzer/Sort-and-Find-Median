@@ -94,7 +94,7 @@ int main(){
     // std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
     std::vector<int> nums;
-    readIntegersFromFile("input4.txt", nums);
+    readIntegersFromFile("input1.txt", nums);
 
     // nums = worstCaseQuickSelect();
 
@@ -157,7 +157,7 @@ int main(){
     // writeVectorToFile(nums,"outputworstcase.txt");
 
     std::vector<int> output;
-    readIntegersFromFile("heapsort4.txt",output);
+    readIntegersFromFile("heapsort1.txt",output);
 
     if (vectorsMatch(nums, output)) {
         std::cout << "Vectors match!" << std::endl;

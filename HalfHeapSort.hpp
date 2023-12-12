@@ -73,11 +73,11 @@ int halfHeapSort(std::vector<int> &nums, int &duration)
    for (int j = 0; j <= median; ++j)
    {
       // Replace the root with the last element and adjust the heap
-      nums[1] = nums[nums.size() - 1];
-      nums[0] = nums[1]; // for percDown precondition
-      nums.pop_back();
-      percDown(nums, 1);
+      nums[0] = nums[nums.size() - 1];
+      nums[1] = nums[1]; // for percDown precondition
       // nums.pop_back();
+      percDown(nums, 1);
+      nums.pop_back();
    }
    nums.erase(nums.begin()); // remove 0 index used as temp
 
