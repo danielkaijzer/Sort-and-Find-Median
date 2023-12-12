@@ -107,10 +107,10 @@ int main(){
     // writeVectorToFile(nums, sorted_output);
 
 
-    std::cout << "Half Selection Sort: \n";
-    std::cout << "Median: " << halfSelectionSort(nums,duration) <<
-    std::endl << "Duration: " << duration << std::endl << std::endl;
-    int halfSelection_Duration = duration;
+    // std::cout << "Half Selection Sort: \n";
+    // std::cout << "Median: " << halfSelectionSort(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int halfSelection_Duration = duration;
 
     // std::cout << "Merge Sort: \n";
     // std::cout << "Median: " << mergeSort(nums,duration) <<
@@ -135,10 +135,10 @@ int main(){
     // int heapSort_Duration = duration;
 
     // DOESN'T MATCH OUTPUT
-    // std::cout << "QuickSelect: \n";
-    // std::cout << "Median: " << quickSelect(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int QuickSelect_Duration = duration;
+    std::cout << "QuickSelect: \n";
+    std::cout << "Median: " << quickSelect(nums,duration) <<
+    std::endl << "Duration: " << duration << std::endl << std::endl;
+    int QuickSelect_Duration = duration;
 
     // std::cout << "Quicksort: \n";
     // std::cout << "Median: " << quickSort(nums,duration) <<
@@ -152,15 +152,15 @@ int main(){
 
     // writeVectorToFile(nums,"myheap1.txt");
 
-    std::vector<int> output;
-    readIntegersFromFile("selectionsort1.txt",output);
-    // readIntegersFromFile("heapsort4.txt",output);
+    // std::vector<int> output;
+    // readIntegersFromFile("selectionsort1.txt",output);
+    // // readIntegersFromFile("heapsort4.txt",output);
 
-    if (vectorsMatch(nums, output)) {
-        std::cout << "Vectors match!" << std::endl;
-    } else {
-        std::cout << "Vectors do not match." << std::endl;
-    }
+    // if (vectorsMatch(nums, output)) {
+    //     std::cout << "Vectors match!" << std::endl;
+    // } else {
+    //     std::cout << "Vectors do not match." << std::endl;
+    // }
 
     // for (int i = 0; i < nums.size(); ++i){
     //     if (i < 3 || i > nums.size()-4)

@@ -38,15 +38,12 @@ void percolateDown(std::vector<int>& nums, int hole){
 
     int size = nums.size();
 
-    // if (t == true){
-    //     std::cout << nums[0] << std::endl;
-    // }
+    nums[0] = std::move(nums[hole]); // move hole val into temp area
 
     // keep checking children to see if any of them 
     // have values larger than current hole value
     // if so, swap current hole and largest child
-    for (nums[0] = std::move(nums[hole]); hole*2 <= size; hole = child ){
-    // for (; hole*2 <= size; hole = child){
+    for (; hole*2 <= size; hole = child){
         child = hole*2; // make child current left child of hole
 
         // if left child index isn't last index of array
@@ -70,13 +67,10 @@ void percolateDown(std::vector<int>& nums, int hole){
 }
 
 void buildHeap(std::vector<int>& heap){
-    int median = (heap.size()-1)/2;
+    int median = heap.size() % 2 == 0 ? heap.size() / 2: heap.size() / 2;
 
-    // bool tf = false;
-
-    for (int i = median; i >0; --i){
+    for (int i = median-1; i >0; --i){
         percolateDown(heap, i);
-        // std::cout << heap[i];
     }
 }
 
@@ -93,24 +87,22 @@ int halfHeapSort ( std::vector<int>& nums, int& duration){
     // PHASE 1: BUILD (MIN)HEAP
     buildHeap(nums);
 
-    // for (auto n: nums){
-    //     std::cout << n << std::endl;
-    // }
-
     // PHASE 2: DELETEMIN()
 
-    // for (int j = median+1; j > 1; --j){
-    //     nums[1] = std::move(nums[nums.size()-1]);
-    //     nums.pop_back(); // --j
-    //     // Percolate down to restore minheap property
-    //     percolateDown(nums,1);
-    //     // std::cout << nums[1] << std::endl;
+    for (int j = median+1; j > 1; --j){
+        nums[1] = std::move(nums[nums.size()-1]);
+        nums.pop_back(); // --j
+        // Percolate down to restore minheap property
+        percolateDown(nums,1);
+    }
+
+    // if (even){
+    //     nums.pop_back();
     // }
 
     // remove 0 index used for temp values, 
     // so vector goes back to original state
-    // nums.erase(nums.begin());
-    nums.pop_back();
+    nums.erase(nums.begin());
 
     auto t2 = std::chrono::high_resolution_clock::now(); // Update the stop time
     auto dur = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);

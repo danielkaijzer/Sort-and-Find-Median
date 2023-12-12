@@ -21,7 +21,7 @@ int inPlaceMergeSort ( std::vector<int>& nums, int& duration){
 
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    size_t half = nums.size()/2;
+    size_t half = (nums.size()-1)/2;
 
     inPlaceMergeSortHelper(nums, 0, nums.size()-1);
 
