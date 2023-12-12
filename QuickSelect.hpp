@@ -52,13 +52,22 @@ void quickSelectHelper(std::vector<int>& a, std::vector<int>::iterator left, std
 
         auto p = hoarePartition(a, left, m3);
 
-        // Add Recursive Callss to quickSelectHelper after partitioning
-        if (k < p) {
-            quickSelectHelper(a, left, p, k);
-        } else if (k > p) {
-            quickSelectHelper(a, p+1, right, k);
-        } else {
-            return; // kth element found
+    
+        // if (k < p) {
+        //     quickSelectHelper(a, left, p, k);
+        // } else if (k > p) {
+        //     quickSelectHelper(a, p+1, right, k);
+        // } else {
+        //     return; // kth element found
+        // }
+        if (p <= k){ // if median is less than pivot
+            quickSelectHelper(a, left, p, p-1);
+        }
+        else if (m3 > k+1){
+            quickSelectHelper(a, p+1, right,p);
+        }
+        else{ // median == pivot, done
+            return;
         }
 
     } 
