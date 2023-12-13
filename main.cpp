@@ -4,8 +4,8 @@
 #include "MergeSort.hpp"
 #include "InPlaceMergeSort.hpp"
 #include "HalfHeapSort.hpp"
-// #include "QuickSelect.hpp"
-#include "MedianOfMediansMethod.hpp"
+#include "QuickSelect.hpp"
+// #include "MedianOfMediansMethod.hpp"
 #include "WorstCaseQuickSelect.hpp"
 
 #include <iostream>
@@ -94,11 +94,9 @@ int main(){
     // std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
     std::vector<int> nums;
-    readIntegersFromFile("input4.txt", nums);
+    // readIntegersFromFile("input9.txt", nums);
 
-    // nums = worstCaseQuickSelect();
-
-
+    nums = worstCaseQuickSelect();
 
     // std::cout << "Standard Sort: \n";
     // std::cout << "Median: " << standardSort(nums,duration) <<
@@ -126,28 +124,16 @@ int main(){
     // int InPlaceMergeSort_Duration = duration;
 
 
-    // DOESN'T MATCH OUTPUT
-    std::cout << "Half Heap Sort: \n";
-    std::cout << "Median: " << halfHeapSort(nums,duration) <<
+    // std::cout << "Half Heap Sort: \n";
+    // std::cout << "Median: " << halfHeapSort(nums,duration) <<
+    // std::endl << "Duration: " << duration << std::endl << std::endl;
+    // int HalfHeapSort_Duration = duration;
+
+    std::cout << "QuickSelect: \n";
+    std::cout << "Median: " << quickSelect(nums,duration) <<
     std::endl << "Duration: " << duration << std::endl << std::endl;
-    int HalfHeapSort_Duration = duration;
+    int QuickSelect_Duration = duration;
 
-
-    // std::cout << "Full Heap Sort: \n";
-    // std::cout << "Median: " << HeapSort(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int heapSort_Duration = duration;
-
-    // DOESN'T MATCH OUTPUT
-    // std::cout << "QuickSelect: \n";
-    // std::cout << "Median: " << quickSelect(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int QuickSelect_Duration = duration;
-
-    // std::cout << "Quicksort: \n";
-    // std::cout << "Median: " << quickSort(nums,duration) <<
-    // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int QuickSelect_Duration = duration;
 
     // std::cout << "Median of Medians: \n";
     // std::cout << "Median: " << quickSelectM(nums,duration) <<
@@ -156,14 +142,14 @@ int main(){
 
     // writeVectorToFile(nums,"outputworstcase.txt");
 
-    std::vector<int> output;
-    readIntegersFromFile("heapsort4.txt",output);
+    // std::vector<int> output;
+    // readIntegersFromFile("heapsort4.txt",output);
 
-    if (vectorsMatch(nums, output)) {
-        std::cout << "Vectors match!" << std::endl;
-    } else {
-        std::cout << "Vectors do not match." << std::endl;
-    }
+    // if (vectorsMatch(nums, output)) {
+    //     std::cout << "Vectors match!" << std::endl;
+    // } else {
+    //     std::cout << "Vectors do not match." << std::endl;
+    // }
 
     // for (int i = 0; i < nums.size(); ++i){
     //     if (i < 3 || i > nums.size()-4)

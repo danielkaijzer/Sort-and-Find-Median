@@ -8,7 +8,7 @@
 int halfSelectionSort ( std::vector<int>& nums, int& duration){
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    // not sure if this needs to be in main or in this file
+    // refuse inputs that are too large (it'll take super long)
     if (nums.size() > 50000){
         std::cout << "input too big for selection sort\n";
         return -1;
