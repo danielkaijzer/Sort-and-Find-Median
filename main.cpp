@@ -5,7 +5,7 @@
 #include "InPlaceMergeSort.hpp"
 #include "HalfHeapSort.hpp"
 #include "QuickSelect.hpp"
-// #include "MedianOfMediansMethod.hpp"
+#include "MedianOfMediansMethod.hpp"
 #include "WorstCaseQuickSelect.hpp"
 
 #include <iostream>
@@ -94,9 +94,9 @@ int main(){
     // std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
     std::vector<int> nums;
-    // readIntegersFromFile("input9.txt", nums);
+    readIntegersFromFile("input1.txt", nums);
 
-    nums = worstCaseQuickSelect();
+    // nums = worstCaseQuickSelect();
 
     // std::cout << "Standard Sort: \n";
     // std::cout << "Median: " << standardSort(nums,duration) <<
@@ -129,16 +129,16 @@ int main(){
     // std::endl << "Duration: " << duration << std::endl << std::endl;
     // int HalfHeapSort_Duration = duration;
 
-    std::cout << "QuickSelect: \n";
-    std::cout << "Median: " << quickSelect(nums,duration) <<
-    std::endl << "Duration: " << duration << std::endl << std::endl;
-    int QuickSelect_Duration = duration;
-
-
-    // std::cout << "Median of Medians: \n";
-    // std::cout << "Median: " << quickSelectM(nums,duration) <<
+    // std::cout << "QuickSelect: \n";
+    // std::cout << "Median: " << quickSelect(nums,duration) <<
     // std::endl << "Duration: " << duration << std::endl << std::endl;
-    // int MedianOfMedians = duration;
+    // int QuickSelect_Duration = duration;
+
+
+    std::cout << "Median of Medians: \n";
+    std::cout << "Median: " << quickSelectM(nums,duration) <<
+    std::endl << "Duration: " << duration << std::endl << std::endl;
+    int MedianOfMedians = duration;
 
     // writeVectorToFile(nums,"outputworstcase.txt");
 
