@@ -165,15 +165,13 @@ std::vector<int>::iterator medianOfMediansHelper(std::vector<int>::iterator& low
 }
 
 std::vector<int>::iterator medianOfMedians(std::vector<int>::iterator& low, std::vector<int>::iterator& high) {
-    std::vector<int>::iterator median = low;
-
     int size = std::distance(low, high);
-    int k = (size-1)/2;
     
     // base case
     if (size < 25) {
+        int k = (size-1)/2;
         std::sort(low, high + 1); // Ensure correct range for sorting
-        median = low+k;
+        std::vector<int>::iterator median = low+k;
         std::swap(*median,*high);
     }
     else{ // else call Median of Medians algorithm
