@@ -4,7 +4,7 @@
 #include "MergeSort.hpp"
 #include "InPlaceMergeSort.hpp"
 #include "HalfHeapSort.hpp"
-#include "QuickSelect.hpp"
+// #include "QuickSelect.hpp"
 #include "MedianOfMediansMethod.hpp"
 #include "WorstCaseQuickSelect.hpp"
 
@@ -94,9 +94,9 @@ int main(){
     // std::vector<int> nums {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
     std::vector<int> nums;
-    readIntegersFromFile("input1.txt", nums);
+    // readIntegersFromFile("input9.txt", nums);
 
-    // nums = worstCaseQuickSelect();
+    nums = worstCaseQuickSelect();
 
     // std::cout << "Standard Sort: \n";
     // std::cout << "Median: " << standardSort(nums,duration) <<
